@@ -151,7 +151,7 @@
 
   <h1>订阅回本分析（可分享）</h1>
   <p class="subtitle">数据截止 2026-10-16（Asia/Shanghai）· 平台「首购」标识 · CAC = $160</p>
-<p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-16</strong>；续订=<strong>实际付款路径第N笔→39.9</strong>。财务模型 / take 校准窗=<strong>2026-06-05 ~ 2026-10-15</strong>。档位含 14.99/29.9。</p>
+<p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-16</strong>；续订=<strong>实际付款路径第2～N笔连续 $39.9</strong>（无第2则无第3；非财务账单窗）。财务模型 / take 校准窗=<strong>2026-06-05 ~ 2026-10-15</strong>。档位含 14.99/29.9。</p>
 
   <h2>1. 核心结论（一眼看）</h2>
   <div class="kpi-row">
@@ -206,7 +206,7 @@
       <div class="method-title">续费率平均连环 <span class="badge badge-old">对照 · 已改路径口径</span></div>
       <p class="muted" style="margin:0 0 8px">各日 N→N+1 续费率简单平均，再连环推期望存活与现金流。续订看板已改为<strong>实际付款路径</strong>计 N 期（不再用 ±1 天窗）。</p>
       <ul class="assumptions">
-        <li>第 N 期(N≥2) = 自首购起排序的第 N 笔已支付且金额=$39.9</li>
+        <li>第 N 期(N≥2) = 自首购起第 2～N 笔均为已支付 $39.9（连续；无第 2 期则无第 3 期）</li>
         <li>估的是「典型曲线下的<strong>期望</strong>净收何时穿过 $160」</li>
         <li>与左侧「用户级真实累加」仍不同：连环是队列平均步留存，非每人现金流</li>
       </ul>
