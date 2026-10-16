@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>财务模型 · PayerMax × 订单</title>
+<style>
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:24px;max-width:1100px;color:#e7ecf3;background:#0f1419}
+h1{font-size:1.4rem} h2{font-size:1.15rem;margin-top:1.6em;border-bottom:1px solid #2d3a4f;padding-bottom:6px}
+table{border-collapse:collapse;width:100%;background:#1a2332;margin:8px 0 16px}
+th,td{border:1px solid #2d3a4f;padding:6px 10px;font-size:13px;text-align:right}
+th:first-child,td:first-child{text-align:left}
+th{background:#243044;color:#8b9bb4}
+.kpi{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
+.kpi div{background:#1a2332;border:1px solid #2d3a4f;border-radius:8px;padding:12px 16px;min-width:140px}
+.kpi b{display:block;font-size:1.2rem}
+.kpi span{color:#8b9bb4;font-size:12px}
+.note{color:#8b9bb4;font-size:13px;line-height:1.5}
+a{color:#3b82f6}
+
+.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding:10px 12px;background:rgba(36,48,68,.9);border:1px solid #2d3a4f;border-radius:10px;font-size:.85rem}
+.site-nav a{color:#8b9bb4;text-decoration:none;padding:5px 10px;border-radius:7px}
+.site-nav a:hover{color:#e7ecf3;background:rgba(59,130,246,.2)}
+.site-nav a.active{color:#fff;background:#3b82f6}
+.site-nav .brand{color:#e7ecf3;font-weight:700;margin-right:6px;padding:5px 4px}
+
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html">回本分析</a><a href="finance.html" class="active">财务模型</a></nav>
+<h1>投流财务模型摘要</h1>
+<p class="note">账单窗口 <b>2026-09-10 ~ 2026-10-14</b>（35 天）· 关联键 Trade Order ID ↔ 第三方单号 · 窗口内匹配率 100% · GMV 差 0<br/>
+数据来源：PayerMax 对账文件 × 平台订单；手续费/退款/拒付均来自通道回传。</p>
+
+<div class="kpi">
+<div><span>Gross GMV</span><b>$145,083</b></div>
+<div><span>手续费</span><b>$6,976</b><span>4.81%</span></div>
+<div><span>退款</span><b>$9,664</b><span>6.66%</span></div>
+<div><span>拒付/预警成本</span><b>$7,279</b><span>5.02%</span></div>
+<div><span>Final Net</span><b>$121,087</b><span>take 83.5%</span></div>
+</div>
+
+<h2>现金瀑布</h2>
+<table>
+<tr><th>步骤</th><th>USD</th><th>占 GMV</th></tr>
+<tr><td>Gross</td><td>145,083.20</td><td>100%</td></tr>
+<tr><td>− Fee</td><td>6,976.50</td><td>4.81%</td></tr>
+<tr><td>= 扣费后</td><td>138,106.70</td><td>95.19%</td></tr>
+<tr><td>− 退款额</td><td>9,664.30</td><td>6.66%</td></tr>
+<tr><td>− 拒付净成本</td><td>7,278.60</td><td>5.02%</td></tr>
+<tr><td><b>Final Net</b></td><td><b>121,086.70</b></td><td><b>83.46%</b></td></tr>
+</table>
+
+<h2>推荐 take-rate</h2>
+<table>
+<tr><th>场景</th><th>take</th></tr>
+<tr><td>手续费+退款</td><td>0.885</td></tr>
+<tr><td>含拒付/预警</td><td>0.835</td></tr>
+<tr><td>旧短窗（回本看板沿用）</td><td>0.8931</td></tr>
+</table>
+
+<h2>首购档单位经济（窗口内）</h2>
+<table>
+<tr><th>档</th><th>用户</th><th>人均GMV</th><th>人均最终净*</th><th>距CAC$160</th></tr>
+<tr><td>19.9</td><td>765</td><td>58.31</td><td>52.65</td><td>107.35</td></tr>
+<tr><td>39.9</td><td>60</td><td>83.79</td><td>78.29</td><td>81.71</td></tr>
+<tr><td>99.9</td><td>38</td><td>99.90</td><td>92.16</td><td>67.84</td></tr>
+</table>
+<p class="note">* 仅含可回挂本窗口原单的退款/拒付。窗口内无 $9.9 SUCCESS（历史首购在 09-10 前）。CAC 按获客成本 $160 计。</p>
+
+<h2>近几日 P&amp;L</h2>
+<table>
+<tr><th>日期</th><th>成功笔</th><th>GMV</th><th>Fee</th><th>退款</th><th>拒付净</th><th>Final Net</th></tr>
+<tr><td>2026-10-08</td><td>120</td><td>4,268.0</td><td>205.9</td><td>199.4</td><td>-140.0</td><td>3,720.9</td></tr>
+<tr><td>2026-10-09</td><td>115</td><td>4,228.5</td><td>203.2</td><td>239.3</td><td>-434.5</td><td>3,349.4</td></tr>
+<tr><td>2026-10-10</td><td>131</td><td>4,826.9</td><td>231.9</td><td>638.4</td><td>-525.0</td><td>3,426.8</td></tr>
+<tr><td>2026-10-11</td><td>84</td><td>3,011.6</td><td>145.2</td><td>199.5</td><td>-250.0</td><td>2,415.4</td></tr>
+<tr><td>2026-10-12</td><td>110</td><td>3,889.0</td><td>187.8</td><td>0.0</td><td>-50.0</td><td>3,651.2</td></tr>
+<tr><td>2026-10-13</td><td>131</td><td>4,766.9</td><td>229.3</td><td>99.7</td><td>-25.0</td><td>4,411.9</td></tr>
+<tr><td>2026-10-14</td><td>124</td><td>4,387.6</td><td>211.8</td><td>638.4</td><td>-429.8</td><td>3,102.8</td></tr>
+</table>
+<p class="note">本页为静态摘要，可随每日对账与订单刷新后重新发布。</p>
+</body></html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>订阅回本分析（可分享）</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --surface: #1a2332;
+    --surface2: #243044;
+    --border: #2d3a4f;
+    --text: #e8eef6;
+    --muted: #8b9bb0;
+    --accent: #3b82f6;
+    --accent-soft: rgba(59,130,246,.15);
+    --good: #34d399;
+    --warn: #fbbf24;
+    --bad: #f87171;
+    --rec: #22d3ee;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); margin: 0 0 28px; font-size: 0.95rem; }
+  h2 {
+    font-size: 1.15rem;
+    margin: 36px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+  }
+  h3 { font-size: 1rem; margin: 20px 0 10px; color: var(--rec); }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+  }
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  @media (max-width: 720px) {
+    .grid2 { grid-template-columns: 1fr; }
+  }
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin-left: 6px;
+  }
+  .badge-rec { background: var(--accent-soft); color: var(--rec); }
+  .badge-old { background: rgba(251,191,36,.12); color: var(--warn); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin: 8px 0 4px;
+  }
+  th, td {
+    padding: 8px 10px;
+    text-align: right;
+    border-bottom: 1px solid var(--border);
+  }
+  th:first-child, td:first-child { text-align: left; }
+  th {
+    background: var(--surface2);
+    color: var(--muted);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  tr:hover td { background: rgba(255,255,255,.02); }
+  .num { font-variant-numeric: tabular-nums; }
+  .pos { color: var(--good); }
+  .neg { color: var(--bad); }
+  .muted { color: var(--muted); }
+  ul.assumptions {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  ul.assumptions li { margin: 4px 0; }
+  .callout {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+  }
+  .callout.warn {
+    border-left-color: var(--warn);
+    background: rgba(251,191,36,.1);
+  }
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+  @media (max-width: 720px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+  }
+  .kpi .v { font-size: 1.45rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .kpi .l { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .footer {
+    margin-top: 40px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+  .method-title { font-weight: 600; margin-bottom: 6px; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding:10px 12px;background:rgba(36,48,68,.9);border:1px solid #2d3a4f;border-radius:10px;font-size:.85rem}
+.site-nav a{color:#8b9bb4;text-decoration:none;padding:5px 10px;border-radius:7px}
+.site-nav a:hover{color:#e7ecf3;background:rgba(59,130,246,.2)}
+.site-nav a.active{color:#fff;background:#3b82f6}
+.site-nav .brand{color:#e7ecf3;font-weight:700;margin-right:6px;padding:5px 4px}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html" class="active">回本分析</a><a href="finance.html">财务模型</a></nav>
+
+  <h1>订阅回本分析（可分享）</h1>
+  <p class="subtitle">数据截止 2026-10-16（Asia/Shanghai）· 平台「首购」标识 · CAC = $160</p>
+
+  <h2>1. 核心结论（一眼看）</h2>
+  <div class="kpi-row">
+    <div class="kpi">
+      <div class="v">约 19%</div>
+      <div class="l">观察期内真正回本的用户占比<br/>（周订队列，实际路径）</div>
+    </div>
+    <div class="kpi">
+      <div class="v">~35 天</div>
+      <div class="l">已回本用户中位天数<br/>（约第 6 笔成功付款）</div>
+    </div>
+    <div class="kpi">
+      <div class="v">$97–$111</div>
+      <div class="l">队列人均期末净收<br/>（仍低于 CAC $160）</div>
+    </div>
+    <div class="kpi">
+      <div class="v">0.885</div>
+      <div class="l">主口径 take<br/>（手续费+退款）</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>主推荐：实际付款路径法。</strong>
+    按每个用户真实成功到账累加净收，看何时首次 ≥ $160。
+    旧「续费率平均连环」估的是期望存活曲线，容易把跳期付款想成连续付费，对 19.9 / 39.9 偏乐观约 $30–$43。
+  </div>
+
+  <h2>2. 假设与口径</h2>
+  <div class="card">
+    <ul class="assumptions">
+      <li><strong>获客成本（CAC）</strong>：$160 / 人</li>
+      <li><strong>净收 take（主口径）</strong>：0.885 ≈ 毛收 × (1 − 手续费 4.81% − 退款约 6.66%)，来自 PayerMax 对账 × 订单财务窗（约 9/10–10/14）</li>
+      <li><strong>敏感性</strong>：若再扣拒付/预警约 5%，take ≈ <strong>0.835</strong>（回本比例几乎不变，人均净收略降）</li>
+      <li><strong>首购定义</strong>：平台订单 <code>状态=已支付</code> 且 <code>首购标记=首购</code>；同一用户多笔「首购」时取<strong>最早一笔</strong>定档，路径不重复计用户</li>
+      <li><strong>续订价</strong>：观察期内周订续费多为 $39.9</li>
+      <li><strong>数据 as_of</strong>：2026-10-16（订单全量导出；对账费率来自财务 35 天窗）</li>
+    </ul>
+  </div>
+
+  <h2>3. 两种算法对照</h2>
+  <div class="grid2">
+    <div class="card">
+      <div class="method-title">实际付款路径 <span class="badge badge-rec">主推荐</span></div>
+      <p class="muted" style="margin:0 0 8px">按用户每一笔<strong>真实成功付款</strong>累加净收，不按日历周窗口。</p>
+      <ul class="assumptions">
+        <li>跳过第 2 期、第 3 期再付 → <strong>不算</strong>付过第 2 期</li>
+        <li>报告：观察期内回本%、已回本中位天数/笔数、人均净收、未回本缺口</li>
+        <li>回答的是：「有多少人真的回本了？回本的人多快？」</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="method-title">续费率平均连环 <span class="badge badge-old">旧法 · 日历窗</span></div>
+      <p class="muted" style="margin:0 0 8px">各日 N→N+1 续费率简单平均，再连环推期望存活与现金流。</p>
+      <ul class="assumptions">
+        <li>第 N 期 = 首购日 + 7×(N−1) ±1 天内有无 $39.9</li>
+        <li>估的是「典型曲线下的<strong>期望</strong>净收何时穿过 $160」</li>
+        <li>跳期再付会抬高步留存，路径被想得更平滑 → 易偏乐观</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>4. 实际路径：分产品回本（take = 0.885）</h2>
+  <div class="scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>产品</th>
+        <th>用户数</th>
+        <th>观察期内回本%</th>
+        <th>已回本中位天</th>
+        <th>已回本中位第几笔</th>
+        <th>人均期末净收</th>
+        <th>未回本人均缺口</th>
+      </tr>
+    </thead>
+    <tbody class="num">
+      <tr>
+        <td>9.9</td>
+        <td>499</td>
+        <td>19.6%</td>
+        <td>35</td>
+        <td>6</td>
+        <td>$86.94</td>
+        <td>$126.65</td>
+      </tr>
+      <tr>
+        <td><strong>19.9</strong>（主力）</td>
+        <td>2,284</td>
+        <td><strong>19.3%</strong></td>
+        <td>35</td>
+        <td>6</td>
+        <td>$99.17</td>
+        <td>$107.85</td>
+      </tr>
+      <tr>
+        <td>39.9</td>
+        <td>89</td>
+        <td>18.0%</td>
+        <td>28</td>
+        <td>5</td>
+        <td>$110.69</td>
+        <td>$89.62</td>
+      </tr>
+      <tr>
+        <td>周订混合</td>
+        <td>2,872</td>
+        <td>19.3%</td>
+        <td>35</td>
+        <td>6</td>
+        <td>$97.40</td>
+        <td>$110.53</td>
+      </tr>
+      <tr>
+        <td>99.9 年包</td>
+        <td>285</td>
+        <td class="neg">0.7%</td>
+        <td>55</td>
+        <td>3</td>
+        <td>$89.16</td>
+        <td>$71.59</td>
+      </tr>
+      <tr>
+        <td>全体（含年包）</td>
+        <td>3,157</td>
+        <td>17.6%</td>
+        <td>35</td>
+        <td>6</td>
+        <td>$96.66</td>
+        <td>$106.29</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="muted" style="font-size:0.85rem">说明：中位天数/笔数仅统计<strong>已经回本</strong>的那部分用户；八成未回本会把「人均净收」拉到 CAC 以下。</p>
+
+  <h2>5. 与旧法偏差（人均净收对比）</h2>
+  <div class="scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>产品</th>
+        <th>实际路径人均净收<br/><span class="muted">take 0.885</span></th>
+        <th>旧法期末期望净收<br/><span class="muted">take ≈0.893</span></th>
+        <th>差（实际 − 旧）</th>
+        <th>旧法回本结论</th>
+      </tr>
+    </thead>
+    <tbody class="num">
+      <tr>
+        <td>9.9</td>
+        <td>$86.94</td>
+        <td>$64.75</td>
+        <td class="pos">+$22.19</td>
+        <td>未回本（渐近≈$73）</td>
+      </tr>
+      <tr>
+        <td>19.9</td>
+        <td>$99.17</td>
+        <td>$134.18</td>
+        <td class="neg">−$35.01</td>
+        <td>未回本（渐近≈$153）</td>
+      </tr>
+      <tr>
+        <td>39.9</td>
+        <td>$110.69</td>
+        <td>$153.52</td>
+        <td class="neg">−$42.83</td>
+        <td>外推约第 8 期 / D+49</td>
+      </tr>
+      <tr>
+        <td>周订混合</td>
+        <td>$97.40</td>
+        <td>$127.17</td>
+        <td class="neg">−$29.77</td>
+        <td>未回本（渐近≈$147）</td>
+      </tr>
+      <tr>
+        <td>99.9 年包</td>
+        <td>$89.16</td>
+        <td>$89.22</td>
+        <td class="muted">−$0.06</td>
+        <td>未回本（单笔≈$89）</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="callout warn">
+    旧法说 39.9「约第 8 期回本」= <strong>期望曲线</strong>穿过 $160，不是人人回本。
+    实际路径下仅约 <strong>18%</strong> 个人回本，队列人均仍约 <strong>$111</strong>。
+  </div>
+
+  <h2>6. 敏感性：take = 0.835（含拒付）</h2>
+  <div class="scroll">
+  <table>
+    <thead>
+      <tr>
+        <th>产品</th>
+        <th>回本%</th>
+        <th>已回本中位天</th>
+        <th>人均期末净收</th>
+        <th>未回本人均缺口</th>
+      </tr>
+    </thead>
+    <tbody class="num">
+      <tr><td>9.9</td><td>19.4%</td><td>35</td><td>$82.03</td><td>$128.21</td></tr>
+      <tr><td>19.9</td><td>19.3%</td><td>35</td><td>$93.57</td><td>$110.74</td></tr>
+      <tr><td>39.9</td><td>18.0%</td><td>28</td><td>$104.44</td><td>$93.60</td></tr>
+      <tr><td>周订混合</td><td>19.3%</td><td>35</td><td>$91.90</td><td>$113.23</td></tr>
+      <tr><td>99.9 年包</td><td>0.7%</td><td>55</td><td>$84.12</td><td>$76.58</td></tr>
+      <tr><td>全体含99.9</td><td>17.6%</td><td>35</td><td>$91.20</td><td>$109.24</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="muted" style="font-size:0.85rem">扣拒付后回本比例几乎不动，人均净收下移约 $5–$6；结论方向不变。</p>
+
+  <h2>7. 阅读时注意</h2>
+  <div class="card">
+    <ul class="assumptions">
+      <li><strong>不是人人回本</strong>：观察期内约两成用户个人净收 ≥ CAC；其余人把人均拉低，投流 LTV 应用「人均 / 分位数」而非「已回本中位数」当全体预期。</li>
+      <li><strong>观察期截断</strong>：新用户观察天数短，尚未走完续订生命周期；回本% 会随时间上修，但未必能到 100%。</li>
+      <li><strong>重复首购</strong>：已支付重复「首购」用户按最早一笔定档，不重复进队列；平台标识口径与「真首单」可能不一致。</li>
+      <li><strong>39.9 样本量小</strong>（89 人），波动大，外推结论需谨慎。</li>
+      <li><strong>年包 99.9</strong>：单笔净收约 $89，单靠首笔盖不住 $160，几乎不回本。</li>
+    </ul>
+  </div>
+
+  <h2>8. 一句话给业务</h2>
+  <div class="callout">
+    在 CAC $160、扣手续费与退款后：约 <strong>1/5</strong> 订阅用户能在观察期内回本（中位约 <strong>5 周 / 第 6 笔</strong>）；
+    队列人均净收仍约 <strong>$97–$111</strong>，低于获客成本。评估投流请以<strong>实际路径人均 LTV</strong>为主，勿把「期望曲线第 8 期回本」理解成全体用户都能回本。
+  </div>
+
+  <div class="footer">
+    生成时间：2026-10-16 14:30 Asia/Shanghai · 内部分享稿 · 数字来自平台订单 + PayerMax 对账财务模型<br/>
+    详细过程与用户级明细见同目录 <code>payback_actual_path.md</code> / <code>payback_cac160.md</code>
+  </div>
+
+</div>
+</body>
+</html>
