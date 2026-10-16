@@ -84,7 +84,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     <button class="tab" data-tab="dup" type="button">重复首购用户</button>
     <button class="tab" data-tab="payback" type="button">回本 · CAC$160</button>
   </div>
-  <div class="banner">口径：平台<strong>首购标记</strong> · <strong>全量订单 2026-05-21 ~ 2026-10-16</strong>（非账单窗 9.10–10.14）· 续订=实际付款路径第N笔→39.9 · GMV $<strong>344,882.5</strong> · 重复首购 <strong>80</strong> 人 · 首购 9.9=<strong>503</strong> / 14.99=<strong>0</strong> / 19.9=<strong>2354</strong> / 29.9=<strong>3</strong> / 39.9=<strong>89</strong> / 年包=<strong>288</strong></div>
+  <div class="banner">口径：平台<strong>首购标记</strong> · <strong>全量订单 2026-05-21 ~ 2026-10-16</strong>（非财务账单窗；财务校准窗 2026-06-05 ~ 2026-10-15）· 续订=实际付款路径第N笔→39.9 · GMV $<strong>344,882.5</strong> · 重复首购 <strong>80</strong> 人 · 首购 9.9=<strong>503</strong> / 14.99=<strong>0</strong> / 19.9=<strong>2354</strong> / 29.9=<strong>3</strong> / 39.9=<strong>89</strong> / 年包=<strong>288</strong></div>
 
   <section id="panel-cohort" class="panel active">
     <div class="filters">
@@ -147,8 +147,8 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     </div>
     <div class="table-wrap"><table id="payback-curve"><thead></thead><tbody></tbody></table></div>
     <p class="note">看板曲线仍为「各日 N→N+1 续费率<strong>简单平均</strong>连环」（净收×0.900），见 <code>payback_cac160.md</code>。<br/>
-    <strong>实际付款路径</strong>（推荐对照，take=<strong>0.900</strong> / 敏感性 <strong>0.865</strong>）：按用户真实成功付款累加。周订观察期内约 <strong>24%</strong> 回本；已回本者中位约 <strong>28 天 / 第 5 笔</strong>。队列人均净收仍 &lt; $160（19.9 约 $101，39.9 约 $113）。详情 <code>payback_actual_path.md</code>。</p>
-    <div class="banner warn" style="margin-top:10px">实际路径 vs 连环：39.9 旧法「期望第8期回本」≠ 人人回本——实际仅 ~18% 用户穿过 CAC；人均净收比旧法期望低约 $40，连环偏乐观。</div>
+    <strong>实际付款路径</strong>（推荐对照，take=<strong>0.900</strong> / 敏感性 <strong>0.865</strong>）：按用户真实成功付款累加。周订混合观察期内 <strong>24.1%</strong> 回本；已回本者中位约 <strong>28 天 / 第 5 笔</strong>。队列人均净收仍 &lt; $160（19.9 <strong>$100.85</strong> · 39.9 <strong>$112.57</strong> · 周订混合 <strong>$99.01</strong>）。详情 <code>payback_actual_path.md</code>。</p>
+    <div class="banner warn" style="margin-top:10px">实际路径 vs 连环：39.9 旧法「期望第8期回本」≠ 人人回本——实际仅 18.0% 用户穿过 CAC；19.9 / 周订混合人均净收比旧法期望约低 $25，39.9 约低 $114，连环偏乐观。</div>
   </section>
 
 </div>

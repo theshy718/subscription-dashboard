@@ -151,21 +151,21 @@
 
   <h1>订阅回本分析（可分享）</h1>
   <p class="subtitle">数据截止 2026-10-16（Asia/Shanghai）· 平台「首购」标识 · CAC = $160</p>
-<p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-16</strong>；续订=<strong>实际付款路径第N笔→39.9</strong>（非财务账单窗 9.10–10.14）。财务模型页仍按账单窗。档位含 14.99/29.9。</p>
+<p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-16</strong>；续订=<strong>实际付款路径第N笔→39.9</strong>。财务模型 / take 校准窗=<strong>2026-06-05 ~ 2026-10-15</strong>。档位含 14.99/29.9。</p>
 
   <h2>1. 核心结论（一眼看）</h2>
   <div class="kpi-row">
     <div class="kpi">
-      <div class="v">约 19%</div>
-      <div class="l">观察期内真正回本的用户占比<br/>（周订队列，实际路径）</div>
+      <div class="v">约 24%</div>
+      <div class="l">观察期内真正回本的用户占比<br/>（周订混合 24.1%，实际路径 @0.900）</div>
     </div>
     <div class="kpi">
       <div class="v">~28 天</div>
       <div class="l">已回本用户中位天数<br/>（约第 5 笔成功付款）</div>
     </div>
     <div class="kpi">
-      <div class="v">$101–$113</div>
-      <div class="l">队列人均期末净收<br/>（仍低于 CAC $160）</div>
+      <div class="v">$99–$113</div>
+      <div class="l">队列人均期末净收<br/>（周订 $99.01 · 19.9 $100.85 · 39.9 $112.57）</div>
     </div>
     <div class="kpi">
       <div class="v">0.900</div>
@@ -176,18 +176,18 @@
   <div class="callout">
     <strong>主推荐：实际付款路径法。</strong>
     按每个用户真实成功到账累加净收，看何时首次 ≥ $160。
-    旧「续费率平均连环」估的是期望存活曲线，容易把跳期付款想成连续付费，对 19.9 / 39.9 偏乐观约 $30–$43。
+    旧「续费率平均连环」估的是期望存活曲线，容易把跳期付款想成连续付费；对照表中实际路径人均净收比旧法期望约低 <strong>$25</strong>（19.9 / 周订混合），39.9 约低 <strong>$114</strong>。
   </div>
 
   <h2>2. 假设与口径</h2>
   <div class="card">
     <ul class="assumptions">
       <li><strong>获客成本（CAC）</strong>：$160 / 人</li>
-      <li><strong>净收 take（主口径）</strong>：0.900 ≈ 毛收 × (1 − 手续费 4.83% − 退款约 4.88%)，来自 PayerMax 扩窗对账（约 6/5–10/15）</li>
+      <li><strong>净收 take（主口径）</strong>：0.900 ≈ 毛收 × (1 − 手续费 4.83% − 退款约 4.88%)，来自 PayerMax 对账校准窗 <strong>2026-06-05 ~ 2026-10-15</strong></li>
       <li><strong>敏感性</strong>：若再扣拒付/预警，take ≈ <strong>0.865</strong>（全成本；回本比例接近，人均净收略降）</li>
       <li><strong>首购定义</strong>：平台订单 <code>状态=已支付</code> 且 <code>首购标记=首购</code>；同一用户多笔「首购」时取<strong>最早一笔</strong>定档，路径不重复计用户</li>
       <li><strong>续订价</strong>：观察期内周订续费多为 $39.9</li>
-      <li><strong>数据 as_of</strong>：2026-10-16（订单全量导出；对账费率来自扩窗 6.5–10.15（take 0.900/0.865））</li>
+      <li><strong>数据 as_of</strong>：2026-10-16（订单全量导出；对账费率来自校准窗 <strong>2026-06-05 ~ 2026-10-15</strong>，take 0.900 / 0.865）</li>
     </ul>
   </div>
 
@@ -340,7 +340,7 @@
   </div>
   <div class="callout warn">
     旧法说 39.9「约第 8 期回本」= <strong>期望曲线</strong>穿过 $160，不是人人回本。
-    实际路径下仅约 <strong>18%</strong> 个人回本，队列人均仍约 <strong>$113</strong>。
+    实际路径下仅约 <strong>18.0%</strong> 个人回本，队列人均仍为 <strong>$112.57</strong>。
   </div>
 
   <h2>6. 敏感性：take = 0.865（含拒付）</h2>
@@ -380,8 +380,8 @@
 
   <h2>8. 一句话给业务</h2>
   <div class="callout">
-    在 CAC $160、扣手续费与退款后：约 <strong>1/5</strong> 订阅用户能在观察期内回本（中位约 <strong>5 周 / 第 6 笔</strong>）；
-    队列人均净收仍约 <strong>$97–$111</strong>，低于获客成本。评估投流请以<strong>实际路径人均 LTV</strong>为主，勿把「期望曲线第 8 期回本」理解成全体用户都能回本。
+    在 CAC $160、take <strong>0.900</strong>（扣手续费与退款）下：周订混合约 <strong>24.1%</strong> 用户能在观察期内回本（已回本中位约 <strong>28 天 / 第 5 笔</strong>）；
+    队列人均净收仍约 <strong>$99–$113</strong>（19.9 <strong>$100.85</strong> · 39.9 <strong>$112.57</strong> · 周订混合 <strong>$99.01</strong>），低于获客成本。评估投流请以<strong>实际路径人均 LTV</strong>为主，勿把「期望曲线第 8 期回本」理解成全体用户都能回本。
   </div>
 
   <div class="footer">
