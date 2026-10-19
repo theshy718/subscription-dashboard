@@ -580,7 +580,7 @@ function renderBanner() {
   const m = META || {};
   const cov = m.fee_coverage_users || {};
   document.getElementById('banner').innerHTML = `
-    <b>存量</b>=至少一笔已支付 · <b>续费次数</b>按平台「续费」标记（失败仅计状态=失败，不含待支付）·
+    <b>存量</b>=至少一笔已支付 · 续费失败/总订单以 PayerMax 为主、平台补缺口并交叉去重 ·
     费用来自 PayerMax 对账 join（成功费：trade_order_id↔第三方单号；失败费：pm_user_id=用户ID）·
     <b>不改 CAC($160)</b> / 不改 cohort 续订公式。<br/>
     <span class="warn">⚠ 账单窗外成功单可能手续费为 0（对账未覆盖）— 不对单用户静默套 take。</span><br/>
