@@ -579,11 +579,16 @@ function render() {
 function renderBanner() {
   const m = META || {};
   const cov = m.fee_coverage_users || {};
+  const winLabel = (m.as_of_start && m.as_of_end)
+    ? `${esc(String(m.as_of_start).slice(0,10))}～${esc(String(m.as_of_end).slice(0,10))}`
+    : '—';
   document.getElementById('banner').innerHTML = `
-    <b>存量</b>=至少一笔已支付 · 续费失败/总订单以 PayerMax 为主、平台补缺口并交叉去重 ·
+    <b>数据对齐窗</b> <b>${winLabel}</b>（${esc(m.timezone||'Asia/Shanghai')}）·
+    平台有效时间与 PayerMax bill_day 取交集，窗外交易不进存量/笔数/费用。<br/>
+    <b>存量</b>=对齐窗内至少一笔已支付 · 次数口径 <b>PayerMax 为主、平台补缺口</b> ·
     费用来自 PayerMax 对账 join（成功费：trade_order_id↔第三方单号；失败费：pm_user_id=用户ID）·
-    <b>不改 CAC($160)</b> / 不改 cohort 续订公式。<br/>
-    <span class="warn">⚠ 账单窗外成功单可能手续费为 0（对账未覆盖）— 不对单用户静默套 take。</span><br/>
+    <b>不改 CAC($160)</b> / 不改 cohort 续订公式 / 不改净收益公式项。<br/>
+    <span class="warn">⚠ 订阅状态/黑名单为 MMC 查询快照，可晚于对齐窗截止。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
     · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；若全空请强刷清缓存）。
