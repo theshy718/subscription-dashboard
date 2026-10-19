@@ -631,17 +631,17 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     let rows = filteredOps();
     const getters = {
       mt_day: r=>r.mt_day,
-      ght_s: r=>r['郭海涛_消耗'], ght_n: r=>r['郭海涛_单数'],
-      zhz_s: r=>r['朱惠泽_消耗'], zhz_n: r=>r['朱惠泽_单数'],
-      xss_s: r=>r['熊双双_消耗'], xss_n: r=>r['熊双双_单数'],
-      total_s: r=>r['总消耗'], total_n: r=>r['实际总单数'], total_a: r=>r['总金额'],
+      ght_s: r=>r['郭海涛_消耗'], ght_n: r=>r['郭海涛_单数'], ght_a: r=>r['郭海涛_单笔均本'],
+      zhz_s: r=>r['朱惠泽_消耗'], zhz_n: r=>r['朱惠泽_单数'], zhz_a: r=>r['朱惠泽_单笔均本'],
+      xss_s: r=>r['熊双双_消耗'], xss_n: r=>r['熊双双_单数'], xss_a: r=>r['熊双双_单笔均本'],
+      total_s: r=>r['总消耗'], total_n: r=>r['实际总单数'], total_a: r=>r['总金额'], total_avg: r=>r['总单笔均本'],
       roi: r=>r['总roi'], diff: r=>r['差额单'], complete: r=>r.complete?1:0,
     };
     rows = sortRows(rows, opsSort, getters);
     const cols = [
-      ['mt_day','西七区日'],['ght_s','郭海涛消耗'],['ght_n','单数'],
-      ['zhz_s','朱惠泽消耗'],['zhz_n','单数'],['xss_s','熊双双消耗'],['xss_n','单数'],
-      ['total_s','总消耗'],['total_n','实际总单数'],['total_a','总金额'],['roi','ROI'],['diff','差额单'],['complete','齐套?']
+      ['mt_day','西七区日'],['ght_s','郭海涛消耗'],['ght_n','单数'],['ght_a','均本'],
+      ['zhz_s','朱惠泽消耗'],['zhz_n','单数'],['zhz_a','均本'],['xss_s','熊双双消耗'],['xss_n','单数'],['xss_a','均本'],
+      ['total_s','总消耗'],['total_n','实际总单数'],['total_a','总金额'],['total_avg','总均本'],['roi','ROI'],['diff','差额单'],['complete','齐套?']
     ];
     const thead = table.querySelector('thead');
     thead.innerHTML = '<tr>'+cols.map(([k,lab])=>{
@@ -660,10 +660,10 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     tbody.innerHTML = rows.map(r=>{
       const ok = r.complete ? '✓' : '未齐';
       const style = r.complete ? '' : ' style="opacity:.65"';
-      return `<tr${style}><td>${r.mt_day}</td><td>${opsMoney(r['郭海涛_消耗'])}</td><td>${opsInt(r['郭海涛_单数'])}</td>`+
-        `<td>${opsMoney(r['朱惠泽_消耗'])}</td><td>${opsInt(r['朱惠泽_单数'])}</td>`+
-        `<td>${opsMoney(r['熊双双_消耗'])}</td><td>${opsInt(r['熊双双_单数'])}</td>`+
-        `<td>${opsMoney(r['总消耗'])}</td><td>${opsInt(r['实际总单数'])}</td><td>${opsMoney(r['总金额'])}</td>`+
+      return `<tr${style}><td>${r.mt_day}</td><td>${opsMoney(r['郭海涛_消耗'])}</td><td>${opsInt(r['郭海涛_单数'])}</td><td>${opsMoney(r['郭海涛_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['朱惠泽_消耗'])}</td><td>${opsInt(r['朱惠泽_单数'])}</td><td>${opsMoney(r['朱惠泽_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['熊双双_消耗'])}</td><td>${opsInt(r['熊双双_单数'])}</td><td>${opsMoney(r['熊双双_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['总消耗'])}</td><td>${opsInt(r['实际总单数'])}</td><td>${opsMoney(r['总金额'])}</td><td>${opsMoney(r['总单笔均本'])}</td>`+
         `<td>${opsRoi(r['总roi'])}</td><td>${opsInt(r['差额单'])}</td><td>${ok}</td></tr>`;
     }).join('');
     const all = OPS.rows||[];
