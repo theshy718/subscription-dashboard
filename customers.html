@@ -586,7 +586,7 @@ function renderBanner() {
     <span class="warn">⚠ 账单窗外成功单可能手续费为 0（对账未覆盖）— 不对单用户静默套 take。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
-    · <b>订阅状态 / 是否黑名单</b> 来自每日 PayerMax MMC 拉取（当前可为空）。
+    · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；若全空请强刷清缓存）。
     生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
     · 客户 <b>${m.n_customers||'—'}</b>
     · 成功单手续费匹配 ${(m.fee_match_rate? (m.fee_match_rate*100).toFixed(2):'—')}%
@@ -621,7 +621,7 @@ document.getElementById('q').addEventListener('keydown', e => {
 
 buildThead();
 
-fetch('stock_customers.json')
+fetch('stock_customers.json?v=' + encodeURIComponent((window.__SC_V || Date.now())), {cache:'no-store'})
   .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
   .then(data => {
     META = data.meta || {};
