@@ -73,7 +73,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
 <nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html" class="active">续订看板</a><a href="payback.html">回本分析</a><a href="finance.html">财务模型</a></nav>
   <header>
     <h1>订阅 Cohort 分析</h1>
-    <div class="sub">全量平台订单 <strong style="color:#22c55e">2026-05-21 ~ 2026-10-19</strong>（非账单窗）· 续订=<strong style="color:#22c55e">同套餐路径→39.9</strong> · 最高 <strong id="maxP">—</strong> 期 · 档位含 9.9/14.9/14.99/19.9/29.9/39.9 · 99.9年包单独 · 回本 take=<strong>0.865</strong></div>
+    <div class="sub">全量平台订单 <strong style="color:#22c55e">2026-05-21 ~ 2026-10-19</strong>（非账单窗）· 续订=<strong style="color:#22c55e">同套餐路径→39.9</strong> · 最高 <strong id="maxP">—</strong> 期 · 档位含 9.9/14.9/19.9/29.9/39.9 · 99.9年包单独 · 回本 take=<strong>0.865</strong></div>
   </header>
   <div class="filters" style="margin-bottom:12px">
     <label>首购口径
@@ -104,7 +104,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
       <span class="meta" id="cohort-meta"></span>
     </div>
     <div class="table-wrap"><table id="cohort-table"><thead></thead><tbody></tbody></table></div>
-    <p class="note">首单=平台<strong>已支付</strong>且<strong>首购标记=首购</strong>；产品档=该笔金额（9.9/14.9/14.99/19.9/29.9/39.9；$1.99不进档）。同用户多笔首购均按标识分别计入对应首购日。第N期(N≥2)=自该首购起路径长度≥N，且<strong>第2～N笔均为 39.9</strong>（连续；无第2则无第3；不用 ±1 天日历窗）。<strong>续费率%=实际路径成功n ÷ 够资格成熟首购d</strong>（够资格=观察日已成熟：首购日+7×(N−1)+1≤as_of；未成熟不进分母；<strong>不是</strong>无条件÷第1期全量）。单元格 <code>成功数（续费率%）</code>。汇总按产品分行，分母只加总够资格行。</p>
+    <p class="note">首单=平台<strong>已支付</strong>且<strong>首购标记=首购</strong>；产品档=该笔金额（9.9/14.9/19.9/29.9/39.9；$1.99不进档）。同用户多笔首购均按标识分别计入对应首购日。第N期(N≥2)=自该首购起路径长度≥N，且<strong>第2～N笔均为 39.9</strong>（连续；无第2则无第3；不用 ±1 天日历窗）。<strong>续费率%=实际路径成功n ÷ 够资格成熟首购d</strong>（够资格=观察日已成熟：首购日+7×(N−1)+1≤as_of；未成熟不进分母；<strong>不是</strong>无条件÷第1期全量）。单元格 <code>成功数（续费率%）</code>。汇总按产品分行，分母只加总够资格行。</p>
   </section>
 
 <section id="panel-annual" class="panel">
@@ -255,7 +255,6 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
       {label:'数据区间', value:S.dateMin.slice(5)+' ~ '+S.dateMax.slice(5), hint:'全量平台订单 · 最高 '+MP+' 期 · 非账单窗', cls:'', sm:true},
       {label:'首购 9.9', value:fmtNum(fc['连续订阅 9.9']), hint:(MODE==='channel'?'通道最早已支付':'已支付+首购标记'), cls:'c-amber'},
       {label:'首购 14.9', value:fmtNum(fc['连续订阅 14.9']||0), hint:(MODE==='channel'?'通道最早已支付':'挽留模板·有则计首购'), cls:'c-amber'},
-      {label:'首购 14.99', value:fmtNum(fc['连续订阅 14.99']||0), hint:(MODE==='channel'?'通道最早已支付':'挽留模板·有则计首购'), cls:'c-amber'},
       {label:'首购 19.9', value:fmtNum(fc['连续订阅 19.9']), hint:(MODE==='channel'?'通道最早已支付':'已支付+首购标记'), cls:'c-amber'},
       {label:'首购 29.9', value:fmtNum(fc['连续订阅 29.9']||0), hint:(MODE==='channel'?'通道最早已支付':'已支付+首购标记'), cls:'c-amber'},
       {label:'首购 39.9', value:fmtNum(fc['连续订阅 39.9']), hint:(MODE==='channel'?'通道最早已支付':'已支付+首购标记'), cls:'c-cyan'},
@@ -280,7 +279,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     });
   });
 
-  const PRODUCTS=['连续订阅 9.9','连续订阅 14.9','连续订阅 14.99','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
+  const PRODUCTS=['连续订阅 9.9','连续订阅 14.9','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
   function makeChips(id, key, onChange, productList){
     const plist = productList || PRODUCTS;
     const el=$(id); const state=window[key]=new Set(plist);
@@ -406,7 +405,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
       const rr = elig ? (r.u[i]/elig*100) : null;
       return `<span class="${rateClass(rr)}">${r.u[i]}（${rr==null?'—':rr.toFixed(1)+'%'}）</span>`;
     }
-    const PRODUCT_ORDER = ['连续订阅 9.9','连续订阅 14.9','连续订阅 14.99','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
+    const PRODUCT_ORDER = ['连续订阅 9.9','连续订阅 14.9','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
     function buildProductSummary(prodLabel, prodRows){
       if(!prodRows.length) return '';
       const sU=Array(MP).fill(0), sDen=Array(MP).fill(0), sNum=Array(MP).fill(0);
@@ -467,7 +466,7 @@ td.wrapcell{white-space:normal;max-width:360px;text-align:left;font-size:.72rem;
     const thead=$('#dailyExt-table thead');
     thead.innerHTML='<tr>'+cols.map(c=>`<th data-k="${c.k}">${c.label}</th>`).join('')+'</tr>';
     thead.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{ const k=th.dataset.k; if(dailyExtSort.key===k)dailyExtSort.dir*=-1; else{dailyExtSort.key=k;dailyExtSort.dir=1;} renderDailyExt(); }));
-    const PRODUCT_ORDER=['连续订阅 9.9','连续订阅 14.9','连续订阅 14.99','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
+    const PRODUCT_ORDER=['连续订阅 9.9','连续订阅 14.9','连续订阅 19.9','连续订阅 29.9','连续订阅 39.9'];
     let html='';
     PRODUCT_ORDER.forEach(p=>{
       const pr=rows.filter(r=>r.p===p);
