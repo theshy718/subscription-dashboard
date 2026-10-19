@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>存量客户 · 订阅数据看板</title>
+<style>
+:root{--bg:#0f1419;--panel:#1a2332;--border:#2d3a4f;--text:#e7ecf3;--muted:#8b9bb4;--accent:#3b82f6;--ok:#22c55e;--warn:#fbbf24;--bad:#f87171}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;padding:20px 24px 48px;color:var(--text);background:var(--bg)}
+a{color:var(--accent)}
+.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding:10px 12px;background:rgba(36,48,68,.9);border:1px solid var(--border);border-radius:10px;font-size:.85rem}
+.site-nav a{color:var(--muted);text-decoration:none;padding:5px 10px;border-radius:7px}
+.site-nav a:hover{color:var(--text);background:rgba(59,130,246,.2)}
+.site-nav a.active{color:#fff;background:var(--accent)}
+.site-nav .brand{color:var(--text);font-weight:700;margin-right:6px;padding:5px 4px}
+h1{font-size:1.35rem;margin:0 0 6px}
+.banner{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:0 0 16px;font-size:13px;line-height:1.55;color:var(--muted)}
+.banner b{color:var(--text)}
+.banner .warn{color:var(--warn)}
+.kpi{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.kpi div{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 14px;min-width:120px}
+.kpi b{display:block;font-size:1.15rem}
+.kpi span{color:var(--muted);font-size:11px}
+.filters{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:flex-end;background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin:0 0 14px}
+.filters label{display:flex;flex-direction:column;gap:4px;font-size:11px;color:var(--muted)}
+.filters input,.filters select{background:#0f1419;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:6px 8px;font-size:13px;min-width:90px}
+.filters input[type=text]{min-width:160px}
+.filters .row{display:flex;gap:6px;align-items:center}
+.filters button{background:var(--accent);color:#fff;border:0;border-radius:6px;padding:7px 12px;font-size:13px;cursor:pointer}
+.filters button.secondary{background:#243044;color:var(--text)}
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:10px;max-height:calc(100vh - 280px);background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{border-bottom:1px solid var(--border);padding:6px 8px;text-align:right;white-space:nowrap}
+th:first-child,td:first-child,th:nth-child(2),td:nth-child(2){text-align:left}
+th{position:sticky;top:0;background:#243044;color:var(--muted);font-weight:600;cursor:pointer;user-select:none;z-index:1}
+th:hover{color:var(--text)}
+th .sort{opacity:.45;font-size:10px;margin-left:3px}
+th.sorted .sort{opacity:1;color:var(--accent)}
+tr:hover td{background:rgba(59,130,246,.08)}
+tfoot td{position:sticky;bottom:0;background:#243044;font-weight:700;border-top:2px solid var(--accent);z-index:1}
+.cov-full{color:var(--ok)} .cov-partial{color:var(--warn)} .cov-none{color:var(--bad)}
+.neg{color:var(--bad)} .pos{color:var(--ok)}
+.meta{color:var(--muted);font-size:12px;margin:8px 0}
+.uid{font-variant-numeric:tabular-nums}
+.name{max-width:160px;overflow:hidden;text-overflow:ellipsis}
+</style>
+</head>
+<body>
+<nav class="site-nav" aria-label="站点导航">
+  <span class="brand">订阅数据看板</span>
+  <a href="index.html">续订看板</a>
+  <a href="payback.html">回本分析</a>
+  <a href="finance.html">财务模型</a>
+  <a href="customers.html" class="active">存量客户</a>
+</nav>
+
+<h1>存量客户</h1>
+<div class="banner" id="banner">
+  加载中…
+</div>
+
+<div class="kpi" id="kpi"></div>
+
+<div class="filters" id="filters">
+  <label>搜索 UID / 用户名
+    <input type="text" id="q" placeholder="用户ID 或 用户名"/>
+  </label>
+  <label>首购档
+    <select id="tier">
+      <option value="">全部</option>
+      <option value="14.9">$14.9</option>
+      <option value="19.9">$19.9</option>
+      <option value="29.9">$29.9</option>
+      <option value="39.9">$39.9</option>
+      <option value="99.9">$99.9</option>
+      <option value="other">其他（含 9.9 等）</option>
+    </select>
+  </label>
+  <label>续费次数
+    <span class="row"><input type="number" id="renewMin" placeholder="min" step="1"/><span>~</span><input type="number" id="renewMax" placeholder="max" step="1"/></span>
+  </label>
+  <label>续费失败次数
+    <span class="row"><input type="number" id="failMin" placeholder="min" step="1"/><span>~</span><input type="number" id="failMax" placeholder="max" step="1"/></span>
+  </label>
+  <label>净收益 ($)
+    <span class="row"><input type="number" id="netMin" placeholder="min" step="0.01"/><span>~</span><input type="number" id="netMax" placeholder="max" step="0.01"/></span>
+  </label>
+  <label>首次购买日期
+    <span class="row"><input type="date" id="dateFrom"/><span>~</span><input type="date" id="dateTo"/></span>
+  </label>
+  <label>对账覆盖
+    <select id="cov">
+      <option value="">全部</option>
+      <option value="full">full 全覆盖</option>
+      <option value="partial">partial 部分</option>
+      <option value="none">none 未覆盖</option>
+    </select>
+  </label>
+  <button type="button" id="btnApply">应用筛选</button>
+  <button type="button" class="secondary" id="btnReset">重置</button>
+</div>
+<p class="meta" id="filterMeta"></p>
+
+<div class="table-wrap">
+<table id="tbl">
+<thead>
+<tr>
+  <th data-k="用户ID">用户ID<span class="sort"></span></th>
+  <th data-k="用户名">用户名<span class="sort"></span></th>
+  <th data-k="首次购买时间">首次购买时间<span class="sort"></span></th>
+  <th data-k="首购档">首购档<span class="sort"></span></th>
+  <th data-k="首购套餐">首购套餐<span class="sort"></span></th>
+  <th data-k="已续费次数">已续费<span class="sort"></span></th>
+  <th data-k="续费失败次数">续费失败<span class="sort"></span></th>
+  <th data-k="总次数">总次数<span class="sort"></span></th>
+  <th data-k="已支付笔数">已支付笔<span class="sort"></span></th>
+  <th data-k="总订单次数">总订单<span class="sort"></span></th>
+  <th data-k="已支付GMV">已支付GMV<span class="sort"></span></th>
+  <th data-k="已收取手续费">已收手续费<span class="sort"></span></th>
+  <th data-k="扣费失败手续费">失败手续费<span class="sort"></span></th>
+  <th data-k="退款金额">退款金额<span class="sort"></span></th>
+  <th data-k="退款附加费">退款附加费<span class="sort"></span></th>
+  <th data-k="拒付预警费">拒付预警费<span class="sort"></span></th>
+  <th data-k="最后净收益">最后净收益<span class="sort"></span></th>
+  <th data-k="最近支付时间">最近支付<span class="sort"></span></th>
+  <th data-k="对账覆盖">对账覆盖<span class="sort"></span></th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+<tfoot id="tfoot"></tfoot>
+</table>
+</div>
+
+<script>
+const MONEY = (v) => {
+  if (v == null || Number.isNaN(+v)) return '—';
+  const n = +v;
+  const s = n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  return (n < 0 ? '' : '') + '$' + s;
+};
+const NUM = (v) => (v == null || Number.isNaN(+v)) ? '—' : String(+v);
+let ALL = [];
+let META = {};
+let view = [];
+let sortKey = '首次购买时间';
+let sortDir = -1; // desc default
+
+function numOr(v, d) {
+  if (v === '' || v == null) return d;
+  const n = +v;
+  return Number.isFinite(n) ? n : d;
+}
+
+function applyFilters() {
+  const q = (document.getElementById('q').value || '').trim().toLowerCase();
+  const tier = document.getElementById('tier').value;
+  const renewMin = numOr(document.getElementById('renewMin').value, -Infinity);
+  const renewMax = numOr(document.getElementById('renewMax').value, Infinity);
+  const failMin = numOr(document.getElementById('failMin').value, -Infinity);
+  const failMax = numOr(document.getElementById('failMax').value, Infinity);
+  const netMin = numOr(document.getElementById('netMin').value, -Infinity);
+  const netMax = numOr(document.getElementById('netMax').value, Infinity);
+  const dateFrom = document.getElementById('dateFrom').value || '';
+  const dateTo = document.getElementById('dateTo').value || '';
+  const cov = document.getElementById('cov').value;
+
+  view = ALL.filter(r => {
+    if (q) {
+      const id = String(r['用户ID'] || '').toLowerCase();
+      const name = String(r['用户名'] || '').toLowerCase();
+      if (!id.includes(q) && !name.includes(q)) return false;
+    }
+    if (tier) {
+      const t = String(r['首购档'] || 'other');
+      if (tier === 'other') {
+        if (['14.9','19.9','29.9','39.9','99.9'].includes(t)) return false;
+      } else if (t !== tier) return false;
+    }
+    const rn = +r['已续费次数'] || 0;
+    if (rn < renewMin || rn > renewMax) return false;
+    const fn = +r['续费失败次数'] || 0;
+    if (fn < failMin || fn > failMax) return false;
+    const net = +r['最后净收益'] || 0;
+    if (net < netMin || net > netMax) return false;
+    const d = String(r['首次购买时间'] || '').slice(0, 10);
+    if (dateFrom && d < dateFrom) return false;
+    if (dateTo && d > dateTo) return false;
+    if (cov && r['对账覆盖'] !== cov) return false;
+    return true;
+  });
+  sortAndRender();
+}
+
+function cmp(a, b, k) {
+  let va = a[k], vb = b[k];
+  const numericKeys = new Set([
+    '已续费次数','续费失败次数','总次数','已支付笔数','总订单次数',
+    '已支付GMV','已收取手续费','扣费失败手续费','退款金额','退款附加费',
+    '拒付预警费','最后净收益','首购金额','matched_paid_n'
+  ]);
+  if (numericKeys.has(k)) {
+    va = +va || 0; vb = +vb || 0;
+    return va === vb ? 0 : (va < vb ? -1 : 1);
+  }
+  va = va == null ? '' : String(va);
+  vb = vb == null ? '' : String(vb);
+  return va < vb ? -1 : (va > vb ? 1 : 0);
+}
+
+function sortAndRender() {
+  view.sort((a, b) => sortDir * cmp(a, b, sortKey));
+  render();
+}
+
+function render() {
+  document.querySelectorAll('th').forEach(th => {
+    th.classList.toggle('sorted', th.dataset.k === sortKey);
+    const sp = th.querySelector('.sort');
+    if (sp) sp.textContent = th.dataset.k === sortKey ? (sortDir > 0 ? '▲' : '▼') : '';
+  });
+
+  const tb = document.getElementById('tbody');
+  const frag = document.createDocumentFragment();
+  // virtual-ish: render all — 3250 rows is fine
+  for (const r of view) {
+    const tr = document.createElement('tr');
+    const cov = r['对账覆盖'] || 'none';
+    const net = +r['最后净收益'] || 0;
+    tr.innerHTML = `
+      <td class="uid">${esc(r['用户ID'])}</td>
+      <td class="name" title="${esc(r['用户名']||'')}">${esc(shortName(r['用户名']))}</td>
+      <td>${esc(r['首次购买时间']||'')}</td>
+      <td>${r['首购档'] ? '$'+esc(r['首购档']) : '—'}</td>
+      <td>${esc(r['首购套餐']||'')}</td>
+      <td>${NUM(r['已续费次数'])}</td>
+      <td>${NUM(r['续费失败次数'])}</td>
+      <td>${NUM(r['总次数'])}</td>
+      <td>${NUM(r['已支付笔数'])}</td>
+      <td>${NUM(r['总订单次数'])}</td>
+      <td>${MONEY(r['已支付GMV'])}</td>
+      <td>${MONEY(r['已收取手续费'])}</td>
+      <td>${MONEY(r['扣费失败手续费'])}</td>
+      <td>${MONEY(r['退款金额'])}</td>
+      <td>${MONEY(r['退款附加费'])}</td>
+      <td>${MONEY(r['拒付预警费'])}</td>
+      <td class="${net<0?'neg':'pos'}">${MONEY(r['最后净收益'])}</td>
+      <td>${esc(r['最近支付时间']||'')}</td>
+      <td class="cov-${esc(cov)}">${esc(cov)}</td>`;
+    frag.appendChild(tr);
+  }
+  tb.innerHTML = '';
+  tb.appendChild(frag);
+
+  // totals
+  const sum = (k) => view.reduce((s, r) => s + (+r[k] || 0), 0);
+  const tf = document.getElementById('tfoot');
+  tf.innerHTML = `<tr>
+    <td colspan="5">筛选合计 · ${view.length} 人</td>
+    <td>${sum('已续费次数')}</td>
+    <td>${sum('续费失败次数')}</td>
+    <td>${sum('总次数')}</td>
+    <td>${sum('已支付笔数')}</td>
+    <td>${sum('总订单次数')}</td>
+    <td>${MONEY(sum('已支付GMV'))}</td>
+    <td>${MONEY(sum('已收取手续费'))}</td>
+    <td>${MONEY(sum('扣费失败手续费'))}</td>
+    <td>${MONEY(sum('退款金额'))}</td>
+    <td>${MONEY(sum('退款附加费'))}</td>
+    <td>${MONEY(sum('拒付预警费'))}</td>
+    <td>${MONEY(sum('最后净收益'))}</td>
+    <td colspan="2"></td>
+  </tr>`;
+
+  document.getElementById('filterMeta').textContent =
+    `显示 ${view.length} / ${ALL.length} 人 · 排序 ${sortKey} ${sortDir>0?'升序':'降序'}`;
+}
+
+function esc(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function shortName(n) {
+  if (!n) return '';
+  const s = String(n);
+  if (s.length <= 24) return s;
+  return s.slice(0, 10) + '…' + s.slice(-8);
+}
+
+function renderBanner() {
+  const m = META || {};
+  const cov = m.fee_coverage_users || {};
+  document.getElementById('banner').innerHTML = `
+    <b>存量</b>=至少一笔已支付 · <b>续费次数</b>按平台「续费」标记（失败仅计状态=失败，不含待支付）·
+    费用来自 PayerMax 对账 join（成功费：trade_order_id↔第三方单号；失败费：pm_user_id=用户ID）·
+    <b>不改 CAC($160)</b> / 不改 cohort 续订公式。<br/>
+    <span class="warn">⚠ 账单窗外成功单可能手续费为 0（对账未覆盖）— 不对单用户静默套 take。</span><br/>
+    净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 拒付预警费')}</b>
+    · 退款附加费单独列、不进公式。
+    生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
+    · 客户 <b>${m.n_customers||'—'}</b>
+    · 成功单手续费匹配 ${(m.fee_match_rate? (m.fee_match_rate*100).toFixed(2):'—')}%
+    （覆盖用户 full ${cov.full||0} / partial ${cov.partial||0} / none ${cov.none||0}）
+  `;
+  document.getElementById('kpi').innerHTML = `
+    <div><span>存量客户</span><b>${(m.n_customers||0).toLocaleString()}</b></div>
+    <div><span>已支付 GMV</span><b>${MONEY(m.sum_gmv)}</b></div>
+    <div><span>已收手续费</span><b>${MONEY(m.sum_success_fee)}</b></div>
+    <div><span>失败手续费</span><b>${MONEY(m.sum_fail_fee)}</b></div>
+    <div><span>退款金额</span><b>${MONEY(m.sum_refund)}</b></div>
+    <div><span>拒付预警费</span><b>${MONEY(m.sum_cb)}</b></div>
+    <div><span>合计净收益</span><b>${MONEY(m.sum_net)}</b></div>
+  `;
+}
+
+document.getElementById('btnApply').onclick = applyFilters;
+document.getElementById('btnReset').onclick = () => {
+  ['q','tier','renewMin','renewMax','failMin','failMax','netMin','netMax','dateFrom','dateTo','cov']
+    .forEach(id => { document.getElementById(id).value = ''; });
+  applyFilters();
+};
+['q'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') applyFilters(); });
+});
+document.querySelectorAll('th[data-k]').forEach(th => {
+  th.addEventListener('click', () => {
+    const k = th.dataset.k;
+    if (sortKey === k) sortDir *= -1;
+    else { sortKey = k; sortDir = (k === '首次购买时间' || k === '最近支付时间') ? -1 : 1; }
+    sortAndRender();
+  });
+});
+
+fetch('stock_customers.json')
+  .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+  .then(data => {
+    META = data.meta || {};
+    ALL = data.rows || [];
+    renderBanner();
+    applyFilters();
+  })
+  .catch(err => {
+    document.getElementById('banner').innerHTML =
+      '<span class="warn">加载 stock_customers.json 失败：'+esc(err.message)+
+      '。请确认与本页同目录，或重新运行 build_stock_customers.py。</span>';
+  });
+</script>
+</body>
+</html>

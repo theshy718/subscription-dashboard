@@ -15,6 +15,7 @@
 | [index.html](index.html) | 续订 Cohort 看板：按平台「首购」标识的总表、年包 99.9、日表向前多期、重复首购用户、回本（CAC $160） |
 | [payback.html](payback.html) | 回本分析（同事分享版）：实际付款路径 vs 续费率连环推算对比 |
 | [finance.html](finance.html) | 财务模型摘要：PayerMax 对账 × 订单的现金瀑布、take-rate、单位经济 |
+| [customers.html](customers.html) | 存量客户：一人一行（首购时间、续费/失败次数、手续费/退款/拒付、净收益），可筛选；**不改 CAC** |
 
 ## 口径摘要
 
