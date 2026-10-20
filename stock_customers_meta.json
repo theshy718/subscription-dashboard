@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-10-20T16:40:55.696888+08:00",
+  "generated_at": "2026-10-20T17:09:52.115209+08:00",
   "orders_file": "/home/box/Downloads/orders-2026-10-20.csv",
   "payermax_file": "/workspace/finance-model/out/payermax_all.csv.gz",
   "as_of_start": "2026-06-05 00:00:00",
   "as_of_end": "2026-10-18 23:59:59",
   "as_of_end_exclusive": "2026-10-19 00:00:00",
   "timezone": "Asia/Shanghai",
-  "alignment_rule": "intersection: platform 有效时间∈[AS_OF_START,AS_OF_END) Asia/Shanghai; PayerMax bill_day∈[20260605,20261018] (UTC+0 bill calendar). 存量=≥1 已支付 inside window. Status TSV is point-in-time after as_of_end.",
+  "alignment_rule": "intersection: platform 有效时间∈[2026-06-05 00:00:00,2026-10-19 00:00:00) Asia/Shanghai; PayerMax bill_day∈[20260605,20261018] (UTC+0 bill calendar). 存量=≥1 已支付 inside window. Status TSV is point-in-time after as_of_end. AS_OF_END/BILL_DAY_MAX auto from max(bill_day) in payermax_all.",
   "alignment": {
     "as_of_start": "2026-06-05 00:00:00",
     "as_of_end": "2026-10-18 23:59:59",
     "as_of_end_exclusive": "2026-10-19 00:00:00",
     "timezone": "Asia/Shanghai",
-    "alignment_rule": "intersection: platform 有效时间∈[AS_OF_START,AS_OF_END) Asia/Shanghai; PayerMax bill_day∈[20260605,20261018] (UTC+0 bill calendar). 存量=≥1 已支付 inside window. Status TSV is point-in-time after as_of_end.",
+    "alignment_rule": "intersection: platform 有效时间∈[2026-06-05 00:00:00,2026-10-19 00:00:00) Asia/Shanghai; PayerMax bill_day∈[20260605,20261018] (UTC+0 bill calendar). 存量=≥1 已支付 inside window. Status TSV is point-in-time after as_of_end. AS_OF_END/BILL_DAY_MAX auto from max(bill_day) in payermax_all.",
     "bill_day_min": 20260605,
     "bill_day_max": 20261018,
     "platform_rows_in": 16860,
@@ -53,7 +53,7 @@
   "n_cb_total": 521,
   "net_formula": "已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费",
   "notes": [
-    "数据对齐窗 Asia/Shanghai [2026-06-05 00:00, 2026-10-19 00:00) ≡ 至 2026-10-18 末；PayerMax bill_day 20260605–20261018",
+    "数据对齐窗 Asia/Shanghai [2026-06-05 00:00, 2026-10-19 00:00) ≡ 至 2026-10-18 末；PayerMax bill_day 20260605–20261018（末日 auto from max bill_day）",
     "存量=对齐窗内至少一笔已支付（平台）；窗前/窗后平台单不进存量与交易指标",
     "已续费/续费失败/已支付笔数/总订单：PayerMax 为主，平台订单补缺口并交叉验证（见 dual_source）；两侧均先裁对齐窗",
     "已续费：PM SUCCESS 去掉首笔成功；平台「已支付+续费」仅补 PM 缺失单；分歧记入 dual_source",
@@ -65,7 +65,7 @@
     "拒付预警费：CHARGE_BACK* 的 -Net Amount（净额为负时）",
     "账单窗外成功单可能手续费为 0（对账未覆盖）— 不对单用户静默套 take",
     "不改 CAC($160) / 不改 cohort 续订公式 / 不改净收益公式项",
-    "订阅状态/是否黑名单：可选 left-join payermax_user_status.tsv（每日 PayerMax MMC 拉取，缺文件则空）；状态快照可晚于 as_of_end"
+    "订阅状态/是否黑名单：可选 left-join payermax_user_status.tsv（每日 PayerMax MMC 拉取）；无 MMC 订阅记录显示为「收单」；状态快照可晚于 as_of_end"
   ],
   "dual_source": {
     "matched_trade_ids": 10053,
