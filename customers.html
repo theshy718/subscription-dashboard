@@ -96,7 +96,9 @@ tfoot td{position:sticky;bottom:0;background:#243044;font-weight:700;border-top:
   <button type="button" id="btnApply">搜索</button>
   <button type="button" class="secondary" id="btnClearCol">清除列筛选</button>
   <button type="button" class="secondary" id="btnReset">全部重置</button>
-  <span class="hint">列头 ▼ 可多选筛选（类 WPS）；点列名排序</span>
+  <button type="button" class="secondary" id="btnExportAll" title="导出全部存量客户为 CSV（UTF-8，Excel 可直接打开）">全量导出</button>
+  <button type="button" class="secondary" id="btnExportCardBl" title="导出 MMC 卡号黑名单 CSV（UTF-8，与存量 UID 无关联）">卡号黑名单</button>
+  <span class="hint" id="cardBlHint">列头 ▼ 可多选筛选（类 WPS）；点列名排序 · 全量导出不按当前筛选</span>
 </div>
 <p class="meta" id="filterMeta"></p>
 
@@ -608,6 +610,39 @@ function renderBanner() {
   `;
 }
 
+function csvEscape(v) {
+  const s = v == null ? '' : String(v);
+  if (/[",\r\n]/.test(s)) return '"' + s.replace(/"/g, '""') + '"';
+  return s;
+}
+
+/** Full-dataset CSV (ALL), UTF-8 BOM for Excel. Ignores search/column filters. */
+function exportFullCsv() {
+  if (!ALL.length) {
+    alert('暂无数据可导出');
+    return;
+  }
+  const headers = COLS.map(c => c.label);
+  const lines = [headers.map(csvEscape).join(',')];
+  for (const r of ALL) {
+    lines.push(COLS.map(c => {
+      const v = r[c.k];
+      return csvEscape(v == null ? '' : v);
+    }).join(','));
+  }
+  const blob = new Blob(['\uFEFF' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
+  const d = new Date();
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'stock_customers_' + y + m + day + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+}
+
 document.getElementById('btnApply').onclick = applyFilters;
 document.getElementById('btnClearCol').onclick = () => {
   colFilters = {};
@@ -620,6 +655,54 @@ document.getElementById('btnReset').onclick = () => {
   closeColFilter();
   applyFilters();
 };
+document.getElementById('btnExportAll').onclick = exportFullCsv;
+
+/** MMC card-number blacklist (separate from UID stock). Fetches card_blacklist.json → UTF-8 BOM CSV. */
+function exportCardBlacklistCsv() {
+  const url = 'card_blacklist.json?v=' + encodeURIComponent((window.__SC_V || Date.now()));
+  fetch(url, {cache:'no-store'})
+    .then(r => { if (!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+    .then(data => {
+      const rows = (data && data.rows) || [];
+      if (!rows.length) {
+        alert('卡号黑名单暂无数据');
+        return;
+      }
+      const headers = ['卡号', '状态', '创建时间', '操作人', '备注'];
+      const lines = [headers.map(csvEscape).join(',')];
+      for (const r of rows) {
+        lines.push(headers.map(h => csvEscape(r[h] == null ? '' : r[h])).join(','));
+      }
+      const blob = new Blob(['\uFEFF' + lines.join('\r\n')], {type: 'text/csv;charset=utf-8'});
+      const d = new Date();
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'card_blacklist_' + y + m + day + '.csv';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 0);
+    })
+    .catch(err => alert('加载卡号黑名单失败：' + err.message));
+}
+document.getElementById('btnExportCardBl').onclick = exportCardBlacklistCsv;
+
+// Optional count hint from card_blacklist.json (non-blocking)
+fetch('card_blacklist.json?v=' + encodeURIComponent((window.__SC_V || Date.now())), {cache:'no-store'})
+  .then(r => r.ok ? r.json() : null)
+  .then(data => {
+    if (!data || data.n == null) return;
+    const el = document.getElementById('cardBlHint');
+    if (!el) return;
+    const asOf = (data.as_of || '').replace('T', ' ').slice(0, 16);
+    el.textContent =
+      '列头 ▼ 可多选筛选（类 WPS）；点列名排序 · 全量导出不按当前筛选 · 卡号黑名单 ' +
+      data.n + ' 条' + (asOf ? ' · 已同步 ' + asOf : '');
+  })
+  .catch(() => {});
+
 document.getElementById('q').addEventListener('keydown', e => {
   if (e.key === 'Enter') applyFilters();
 });
