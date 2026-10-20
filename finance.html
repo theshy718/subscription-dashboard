@@ -66,6 +66,7 @@ a{color:var(--accent)}
 .site-nav a[href="customers.html"]{outline:1px solid rgba(45,212,191,.45)}
 
 </style>
+
 </head>
 <body>
 <div class="wrap">
@@ -74,28 +75,28 @@ a{color:var(--accent)}
 <p class="stock-jump"><a class="stock-btn" href="customers.html">打开存量客户看板 →</a>
 <span class="note" style="margin-left:10px">同 UID 多计划分行 · 净收益/手续费按路径拆分</span></p>
 <p class="note">数据范围 <b>2026-05-20 ~ 2026-10-20</b>（Asia/Shanghai）· 已支付 <b>10,270</b> 笔 · 来源平台订单全量<br/>
-通道手续费/退款/拒付明细账单窗 <b>2026-06-05 ~ 2026-10-18</b>（136 天，已并入用户提供对账包）；全量净额 = 平台 GMV × 账单窗实测 take（见下校准框）。<span class="tag">按账单窗实测 take 外推</span></p>
+通道手续费/退款/拒付明细账单窗 <b>2026-06-05 ~ 2026-10-19</b>（137 天，已并入用户提供对账包）；全量净额 = 平台 GMV × 账单窗实测 take（见下校准框）。<span class="tag">按账单窗实测 take 外推</span></p>
 
 <div class="kpi">
 <div><span>Gross GMV（全量）</span><b>$361,759</b></div>
 <div><span>估算 Final Net @0.865</span><b>$312,921</b><span>全成本 take</span></div>
 <div><span>估算 Net @0.900</span><b>$325,583</b><span>手续费+退款</span></div>
-<div><span>估算 Fee 4.83%</span><b>$17,468</b></div>
-<div><span>估算 Refund 4.78%</span><b>$17,301</b></div>
-<div><span>估算 CB/Alert 3.71%</span><b>$13,427</b></div>
+<div><span>估算 Fee 4.83%</span><b>$17,469</b></div>
+<div><span>估算 Refund 4.81%</span><b>$17,388</b></div>
+<div><span>估算 CB/Alert 3.71%</span><b>$13,429</b></div>
 </div>
 <p class="warn">⚠ 上表费/退/拒付与 Final Net 均为外推估算（窗口外日期）；窗口内可用下方实测瀑布。不可替代对账文件。</p>
 
 <div class="box">
 <h3>账单窗实测（校准源）</h3>
-<p class="note">PayerMax × 平台 · 2026-06-05 ~ 2026-10-18（136 天）· 匹配率 100.0% · GMV 差 -39.80 · 含用户对账包 + 本地日 zip 至 2026-10-18</p>
+<p class="note">PayerMax × 平台 · 2026-06-05 ~ 2026-10-19（137 天）· 匹配率 100.0% · GMV 差 -39.80 · 含用户对账包 + 本地日 zip 至 2026-10-19</p>
 <table>
 <tr><th>步骤</th><th>USD</th><th>占 GMV</th></tr>
-<tr><td>Gross</td><td>354,499.33</td><td>100%</td></tr>
-<tr><td>− Fee</td><td>17,116.88</td><td>4.83%</td></tr>
-<tr><td>− 退款额</td><td>16,953.60</td><td>4.78%</td></tr>
-<tr><td>− 拒付/预警净成本</td><td>13,157.30</td><td>3.71%</td></tr>
-<tr><td><b>Final Net</b></td><td><b>307,132.35</b></td><td><b>86.6%</b></td></tr>
+<tr><td>Gross</td><td>358,746.73</td><td>100%</td></tr>
+<tr><td>− Fee</td><td>17,323.07</td><td>4.83%</td></tr>
+<tr><td>− 退款额</td><td>17,242.80</td><td>4.81%</td></tr>
+<tr><td>− 拒付/预警净成本</td><td>13,317.30</td><td>3.71%</td></tr>
+<tr><td><b>Final Net</b></td><td><b>310,721.96</b></td><td><b>86.6%</b></td></tr>
 </table>
 <p class="note">推荐 take：手续费+退款 <b>0.900</b> · 含拒付/预警 <b>0.865</b>（本窗实测 fee+refund≈0.904 · 全成本≈0.866）。</p>
 </div>
@@ -119,15 +120,15 @@ a{color:var(--accent)}
 <p class="note">按支付日 · 账单窗内日期用 PayerMax 实测；窗外仍按费率外推 · <span class="tag">混用</span></p>
 <table>
 <tr><th>日期</th><th>成功笔</th><th>GMV</th><th>Fee</th><th>退款</th><th>拒付</th><th>Final Net</th></tr>
-<tr><td>2026-10-07 <span class="tag">账单实测</span></td><td>122</td><td>4,367.80</td><td>210.55</td><td>259.40</td><td>95.00</td><td>3,801.05</td></tr><tr><td>2026-10-08 <span class="tag">账单实测</span></td><td>120</td><td>4,268.00</td><td>205.90</td><td>199.40</td><td>140.00</td><td>3,720.90</td></tr><tr><td>2026-10-09 <span class="tag">账单实测</span></td><td>115</td><td>4,228.50</td><td>203.20</td><td>239.30</td><td>434.50</td><td>3,349.40</td></tr><tr><td>2026-10-10 <span class="tag">账单实测</span></td><td>131</td><td>4,826.90</td><td>231.90</td><td>638.40</td><td>525.00</td><td>3,426.80</td></tr><tr><td>2026-10-11 <span class="tag">账单实测</span></td><td>84</td><td>3,011.60</td><td>145.15</td><td>199.50</td><td>250.00</td><td>2,415.45</td></tr><tr><td>2026-10-12 <span class="tag">账单实测</span></td><td>110</td><td>3,889.00</td><td>187.75</td><td>0.00</td><td>50.00</td><td>3,651.25</td></tr><tr><td>2026-10-13 <span class="tag">账单实测</span></td><td>131</td><td>4,766.90</td><td>229.35</td><td>99.70</td><td>25.00</td><td>4,411.95</td></tr><tr><td>2026-10-14 <span class="tag">账单实测</span></td><td>124</td><td>4,387.60</td><td>211.80</td><td>638.40</td><td>429.80</td><td>3,102.80</td></tr><tr><td>2026-10-15 <span class="tag">账单实测</span></td><td>131</td><td>4,726.90</td><td>227.65</td><td>119.70</td><td>65.00</td><td>4,313.65</td></tr><tr><td>2026-10-16 <span class="tag">账单实测</span></td><td>126</td><td>4,702.40</td><td>225.58</td><td>199.50</td><td>284.70</td><td>3,991.12</td></tr><tr><td>2026-10-17 <span class="tag">账单实测</span></td><td>118</td><td>4,113.20</td><td>198.89</td><td>39.90</td><td>25.00</td><td>3,849.11</td></tr><tr><td>2026-10-18 <span class="tag">账单实测</span></td><td>96</td><td>3,280.40</td><td>158.98</td><td>0.00</td><td>50.00</td><td>3,071.42</td></tr><tr><td>2026-10-19 <span class="tag">估算</span></td><td>126</td><td>4,247.40</td><td>205.09</td><td>203.13</td><td>157.64</td><td>3,674.00</td></tr><tr><td>2026-10-20 <span class="tag">估算</span></td><td>83</td><td>2,891.70</td><td>139.63</td><td>138.29</td><td>107.33</td><td>2,501.32</td></tr>
+<tr><td>2026-10-07 <span class="tag">账单实测</span></td><td>122</td><td>4,367.80</td><td>210.55</td><td>259.40</td><td>95.00</td><td>3,801.05</td></tr><tr><td>2026-10-08 <span class="tag">账单实测</span></td><td>120</td><td>4,268.00</td><td>205.90</td><td>199.40</td><td>140.00</td><td>3,720.90</td></tr><tr><td>2026-10-09 <span class="tag">账单实测</span></td><td>115</td><td>4,228.50</td><td>203.20</td><td>239.30</td><td>434.50</td><td>3,349.40</td></tr><tr><td>2026-10-10 <span class="tag">账单实测</span></td><td>131</td><td>4,826.90</td><td>231.90</td><td>638.40</td><td>525.00</td><td>3,426.80</td></tr><tr><td>2026-10-11 <span class="tag">账单实测</span></td><td>84</td><td>3,011.60</td><td>145.15</td><td>199.50</td><td>250.00</td><td>2,415.45</td></tr><tr><td>2026-10-12 <span class="tag">账单实测</span></td><td>110</td><td>3,889.00</td><td>187.75</td><td>0.00</td><td>50.00</td><td>3,651.25</td></tr><tr><td>2026-10-13 <span class="tag">账单实测</span></td><td>131</td><td>4,766.90</td><td>229.35</td><td>99.70</td><td>25.00</td><td>4,411.95</td></tr><tr><td>2026-10-14 <span class="tag">账单实测</span></td><td>124</td><td>4,387.60</td><td>211.80</td><td>638.40</td><td>429.80</td><td>3,102.80</td></tr><tr><td>2026-10-15 <span class="tag">账单实测</span></td><td>131</td><td>4,726.90</td><td>227.65</td><td>119.70</td><td>65.00</td><td>4,313.65</td></tr><tr><td>2026-10-16 <span class="tag">账单实测</span></td><td>126</td><td>4,702.40</td><td>225.58</td><td>199.50</td><td>284.70</td><td>3,991.12</td></tr><tr><td>2026-10-17 <span class="tag">账单实测</span></td><td>118</td><td>4,113.20</td><td>198.89</td><td>39.90</td><td>25.00</td><td>3,849.11</td></tr><tr><td>2026-10-18 <span class="tag">账单实测</span></td><td>96</td><td>3,280.40</td><td>158.98</td><td>0.00</td><td>50.00</td><td>3,071.42</td></tr><tr><td>2026-10-19 <span class="tag">账单实测</span></td><td>126</td><td>4,247.40</td><td>206.19</td><td>289.20</td><td>160.00</td><td>3,589.61</td></tr><tr><td>2026-10-20 <span class="tag">估算</span></td><td>83</td><td>2,891.70</td><td>139.63</td><td>138.99</td><td>107.35</td><td>2,501.32</td></tr>
 </table>
 
 <h2>推荐 take-rate</h2>
 <table>
 <tr><th>场景</th><th>take</th><th>说明</th></tr>
-<tr><td>手续费+退款</td><td>0.900</td><td>1 − 4.83% − 4.78% ≈ 0.904；取整为 0.900</td></tr>
+<tr><td>手续费+退款</td><td>0.900</td><td>1 − 4.83% − 4.81% ≈ 0.904；取整为 0.900</td></tr>
 <tr><td>含拒付/预警</td><td>0.865</td><td>账单窗实测 final_net/GMV（本窗 0.866，取整为 0.865）</td></tr>
 </table>
-<p class="note">本页静态摘要 · 生成 2026-10-20 17:38 Asia/Shanghai · 对账 join 账单窗 2026-06-05 ~ 2026-10-18；全量页用校准 take 0.900/0.865 外推。</p>
+<p class="note">本页静态摘要 · 生成 2026-10-21 01:03 Asia/Shanghai · 对账 join 账单窗 2026-06-05 ~ 2026-10-19；全量页用校准 take 0.900/0.865 外推。</p>
 </div>
 </body></html>
