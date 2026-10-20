@@ -3,34 +3,62 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>财务模型 · 全量订单（take 外推）</title>
 <style>
-body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:24px;max-width:1100px;color:#e7ecf3;background:#0f1419}
-h1{font-size:1.4rem} h2{font-size:1.15rem;margin-top:1.6em;border-bottom:1px solid #2d3a4f;padding-bottom:6px}
+:root{
+  --bg:#0b1220;--panel:#121a2b;--bg3:#1a2438;--border:#2a3650;--text:#e8eef8;--muted:#8b9cb3;
+  --accent:#2dd4bf;--accent-soft:rgba(45,212,191,.14);--ok:#34d399;--warn:#f59e0b;--bad:#f87171;
+  --shadow:0 1px 0 rgba(255,255,255,.04),0 10px 28px rgba(0,0,0,.38);
+  --font:"IBM Plex Sans","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--radius:10px
+}
+*{box-sizing:border-box}
+body{font-family:var(--font);margin:0;padding:18px 22px 56px;color:var(--text);background:var(--bg);
+  background-image:radial-gradient(ellipse 90% 50% at 10% -10%,rgba(45,212,191,.07),transparent 55%),radial-gradient(ellipse 70% 40% at 100% 0%,rgba(56,189,248,.05),transparent 50%)}
+.wrap{max-width:1100px;margin:0 auto}
+h1{font-size:1.45rem;font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+h2{font-size:1.12rem;margin-top:1.7em;border-bottom:1px solid var(--border);padding-bottom:8px;letter-spacing:-.01em}
 h3{font-size:1rem;margin-top:1.2em;color:#c5d0e0}
-table{border-collapse:collapse;width:100%;background:#1a2332;margin:8px 0 16px}
-th,td{border:1px solid #2d3a4f;padding:6px 10px;font-size:13px;text-align:right}
+table{border-collapse:separate;border-spacing:0;width:100%;background:var(--panel);margin:8px 0 16px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);font-family:var(--mono);font-size:13px}
+th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:right;font-variant-numeric:tabular-nums}
+tr:last-child td{border-bottom:0}
 th:first-child,td:first-child{text-align:left}
-th{background:#243044;color:#8b9bb4}
-.kpi{display:flex;flex-wrap:wrap;gap:12px;margin:12px 0}
-.kpi div{background:#1a2332;border:1px solid #2d3a4f;border-radius:8px;padding:12px 16px;min-width:140px}
-.kpi b{display:block;font-size:1.2rem}
-.kpi span{color:#8b9bb4;font-size:12px}
-.note{color:#8b9bb4;font-size:13px;line-height:1.5}
-.warn{color:#fbbf24;font-size:13px;line-height:1.5}
-a{color:#3b82f6}
-.box{background:#1a2332;border:1px solid #2d3a4f;border-radius:8px;padding:12px 16px;margin:12px 0}
+th{background:#0e1624;color:var(--muted);font-family:var(--font);font-size:12px;font-weight:600;letter-spacing:.02em}
+tr:hover td{background:rgba(45,212,191,.05)}
+.kpi{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.kpi div{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;min-width:140px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.kpi div::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+.kpi b{display:block;font-size:1.22rem;font-family:var(--mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-top:4px}
+.kpi span{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em;font-weight:500}
+.note{color:var(--muted);font-size:13px;line-height:1.55}
+.warn{color:var(--warn);font-size:13px;line-height:1.55;padding:10px 12px;background:rgba(66,32,6,.45);border:1px solid rgba(245,158,11,.3);border-radius:8px}
+a{color:var(--accent)}
+.box{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin:14px 0;box-shadow:var(--shadow)}
 .box h3{margin-top:0}
-.tag{display:inline-block;background:#3b82f622;color:#93c5fd;border:1px solid #3b82f655;border-radius:4px;padding:1px 6px;font-size:11px;margin-left:6px}
-.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding:10px 12px;background:rgba(36,48,68,.9);border:1px solid #2d3a4f;border-radius:10px;font-size:.85rem}
-.site-nav a{color:#8b9bb4;text-decoration:none;padding:5px 10px;border-radius:7px}
-.site-nav a:hover{color:#e7ecf3;background:rgba(59,130,246,.2)}
-.site-nav a.active{color:#fff;background:#3b82f6}
-.site-nav .brand{color:#e7ecf3;font-weight:700;margin-right:6px;padding:5px 4px}
+.tag{display:inline-block;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(45,212,191,.35);border-radius:999px;padding:2px 8px;font-size:11px;margin-left:6px;font-weight:600}
+.site-nav{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 20px;
+  padding:8px 10px 8px 14px;background:linear-gradient(180deg,rgba(21,32,51,.95),rgba(18,26,43,.92));
+  border:1px solid var(--border);border-radius:12px;font-size:.84rem;
+  box-shadow:var(--shadow);
+}
+.site-nav a{color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;font-weight:500;transition:color .15s ease,background .15s ease}
+.site-nav a:hover{color:var(--text);background:var(--accent-soft)}
+.site-nav a.active{color:#042f2e;background:var(--accent);font-weight:600}
+.site-nav .brand{
+  color:var(--text);font-weight:700;margin-right:8px;padding:6px 8px 6px 2px;
+  letter-spacing:.02em;border-right:1px solid var(--border);padding-right:14px
+}
+.site-nav .brand::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:8px;box-shadow:0 0 0 3px var(--accent-soft);vertical-align:middle}
+
 </style>
 </head>
 <body>
-<nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html">回本分析</a><a href="finance.html" class="active">财务模型</a></nav>
+<div class="wrap">
+<nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html">回本分析</a><a href="finance.html" class="active">财务模型</a><a href="customers.html">存量客户</a></nav>
 <h1>投流财务模型 · 全量平台订单</h1>
 <p class="note">数据范围 <b>2026-05-20 ~ 2026-10-20</b>（Asia/Shanghai）· 已支付 <b>10,270</b> 笔 · 来源平台订单全量<br/>
 通道手续费/退款/拒付明细账单窗 <b>2026-06-05 ~ 2026-10-18</b>（136 天，已并入用户提供对账包）；全量净额 = 平台 GMV × 账单窗实测 take（见下校准框）。<span class="tag">按账单窗实测 take 外推</span></p>
@@ -88,4 +116,5 @@ a{color:#3b82f6}
 <tr><td>含拒付/预警</td><td>0.865</td><td>账单窗实测 final_net/GMV（本窗 0.866，取整为 0.865）</td></tr>
 </table>
 <p class="note">本页静态摘要 · 生成 2026-10-20 17:38 Asia/Shanghai · 对账 join 账单窗 2026-06-05 ~ 2026-10-18；全量页用校准 take 0.900/0.865 外推。</p>
+</div>
 </body></html>
