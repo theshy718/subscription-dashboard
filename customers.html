@@ -574,7 +574,7 @@ function render() {
 
   const nCol = activeFilterCount();
   document.getElementById('filterMeta').textContent =
-    `显示 ${view.length} / ${ALL.length} 人 · 排序 ${sortKey} ${sortDir>0?'升序':'降序'}` +
+    `显示 ${view.length} / ${ALL.length} 行 · 排序 ${sortKey} ${sortDir>0?'升序':'降序'}` +
     (nCol ? ` · 列筛选 ${nCol} 个` : '');
 }
 
@@ -587,20 +587,22 @@ function renderBanner() {
   document.getElementById('banner').innerHTML = `
     <b>数据对齐窗</b> <b>${winLabel}</b>（${esc(m.timezone||'Asia/Shanghai')}）·
     平台有效时间与 PayerMax bill_day 取交集，窗外交易不进存量/笔数/费用。<br/>
-    <b>存量</b>=对齐窗内至少一笔已支付 · 次数口径 <b>PayerMax 为主、平台补缺口</b> ·
-    费用来自 PayerMax 对账 join（成功费：trade_order_id↔第三方单号；失败费：pm_user_id=用户ID）·
+    <b>一行=一条首购计划路径</b>（UID + VIP套餐编码；同 UID 多计划 → 多行）·
+    存量 UID=对齐窗内≥1 已支付 · 次数/费用按路径分摊（PayerMax 为主、平台补缺口）·
     <b>不改 CAC($160)</b> / 不改 cohort 续订公式 / 不改净收益公式项。<br/>
-    <span class="warn">⚠ 订阅状态/黑名单为 MMC 查询快照，可晚于对齐窗截止。</span><br/>
+    <span class="warn">⚠ 订阅状态/黑名单为 MMC 查询快照（按 UID 复制到各路径行），可晚于对齐窗截止。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
     · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；无 MMC 订阅记录显示为「收单」；若全空请强刷清缓存）。
     生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
-    · 客户 <b>${m.n_customers||'—'}</b>
+    · 路径行 <b>${m.n_customers||'—'}</b>
+    · 去重 UID <b>${m.n_unique_uids||'—'}</b>
     · 成功单手续费匹配 ${(m.fee_match_rate? (m.fee_match_rate*100).toFixed(2):'—')}%
-    （覆盖用户 full ${cov.full||0} / partial ${cov.partial||0} / none ${cov.none||0}）
+    （覆盖 full ${cov.full||0} / partial ${cov.partial||0} / none ${cov.none||0}）
   `;
   document.getElementById('kpi').innerHTML = `
-    <div><span>存量客户</span><b>${(m.n_customers||0).toLocaleString()}</b></div>
+    <div><span>路径行数</span><b>${(m.n_customers||0).toLocaleString()}</b></div>
+    <div><span>去重UID</span><b>${(m.n_unique_uids||0).toLocaleString()}</b></div>
     <div><span>已支付 GMV</span><b>${MONEY(m.sum_gmv)}</b></div>
     <div><span>已收手续费</span><b>${MONEY(m.sum_success_fee)}</b></div>
     <div><span>失败手续费</span><b>${MONEY(m.sum_fail_fee)}</b></div>
