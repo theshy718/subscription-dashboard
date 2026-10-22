@@ -54,22 +54,22 @@
 <nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html" class="active">回本分析</a><a href="finance.html">财务模型</a><a href="customers.html">存量客户</a></nav>
 
   <h1>订阅回本分析（可分享）</h1>
-  <p class="subtitle">数据截止 2026-10-21（Asia/Shanghai）· 平台「首购」标识 · CAC = $160</p>
-  <p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-21</strong>；续订=<strong>同套餐链第2～N笔连续→39.9</strong>。财务模型 / take 校准窗=<strong>2026-06-05 ~ 2026-10-15</strong>。主推荐 take=<strong>0.865</strong>（含拒付/预警）。档位含 14.9/29.9。</p>
+  <p class="subtitle">数据截止 2026-10-22（Asia/Shanghai）· 平台「首购」标识 · CAC = $160</p>
+  <p class="subtitle" style="margin-top:-12px">续订看板 cohort 口径=平台全量订单 <strong>2026-05-21 ~ 2026-10-22</strong>；续订=<strong>同套餐链第2～N笔连续→39.9</strong>。财务模型 / take 校准窗=<strong>2026-06-05 ~ 2026-10-15</strong>。主推荐 take=<strong>0.865</strong>（含拒付/预警）。档位含 14.9/29.9。</p>
 
   <h2>1. 核心结论（一眼看）</h2>
   <div class="kpi-row">
     <div class="kpi">
       <div class="v">约 20%</div>
-      <div class="l">观察期内真正回本的用户占比<br/>（周订混合 19.8%，实际路径 @0.865）</div>
+      <div class="l">观察期内真正回本的用户占比<br/>（周订混合 20.1%，实际路径 @0.865）</div>
     </div>
     <div class="kpi">
       <div class="v">~35 天</div>
       <div class="l">已回本用户中位天数<br/>（约第 6 笔成功付款）</div>
     </div>
     <div class="kpi">
-      <div class="v">$87–$117</div>
-      <div class="l">队列人均期末净收<br/>（周订 $95.87 · 19.9 $98.19 · 39.9 $116.58）</div>
+      <div class="v">$87–$120</div>
+      <div class="l">队列人均期末净收<br/>（周订 $96.36 · 19.9 $98.86 · 39.9 $120.23）</div>
     </div>
     <div class="kpi">
       <div class="v">0.865</div>
@@ -91,7 +91,7 @@
       <li><strong>敏感性</strong>：若不扣拒付/预警，take ≈ <strong>0.900</strong>（仅手续费+退款）</li>
       <li><strong>首购定义</strong>：平台订单 <code>状态=已支付</code> 且 <code>首购标记=首购</code>；同一用户多笔「首购」时取<strong>最早一笔</strong>定档，路径不重复计用户</li>
       <li><strong>续订价</strong>：观察期内周订续费多为 $39.9</li>
-      <li><strong>数据 as_of</strong>：2026-10-21（订单全量导出；对账费率来自校准窗 <strong>2026-06-05 ~ 2026-10-15</strong>，take <strong>0.865</strong> / 0.900）</li>
+      <li><strong>数据 as_of</strong>：2026-10-22（订单全量导出；对账费率来自校准窗 <strong>2026-06-05 ~ 2026-10-15</strong>，take <strong>0.865</strong> / 0.900）</li>
     </ul>
   </div>
 
@@ -127,12 +127,12 @@
       </tr>
     </thead>
     <tbody class="num">
-<tr><td>9.9</td><td>498</td><td>19.9%</td><td>35</td><td>6</td><td>$86.65</td><td>$127.89</td></tr>
-<tr><td><strong>19.9（主力）</strong></td><td>2,417</td><td><strong>19.9%</strong></td><td>35</td><td>6</td><td>$98.19</td><td>$110.32</td></tr>
-<tr><td>39.9</td><td>90</td><td>24.4%</td><td>28</td><td>5</td><td>$116.58</td><td>$91.23</td></tr>
-<tr><td>周订混合</td><td>3,042</td><td>19.8%</td><td>35</td><td>6</td><td>$95.87</td><td>$113.20</td></tr>
-<tr><td>99.9（单次+半年）</td><td>293</td><td>0.7%</td><td>55</td><td>3</td><td>$87.12</td><td>$73.59</td></tr>
-<tr><td>全体（含单次/半年包）</td><td>3,335</td><td>18.1%</td><td>35</td><td>6</td><td>$95.10</td><td>$108.98</td></tr>
+<tr><td>9.9</td><td>498</td><td>19.9%</td><td>35</td><td>6</td><td>$87.28</td><td>$127.89</td></tr>
+<tr><td><strong>19.9（主力）</strong></td><td>2,442</td><td><strong>20.4%</strong></td><td>35</td><td>6</td><td>$98.86</td><td>$110.85</td></tr>
+<tr><td>39.9</td><td>91</td><td>25.3%</td><td>28</td><td>5</td><td>$120.23</td><td>$89.20</td></tr>
+<tr><td>周订混合</td><td>3,078</td><td>20.1%</td><td>35</td><td>6</td><td>$96.36</td><td>$113.68</td></tr>
+<tr><td>99.9（单次+半年）</td><td>295</td><td>0.7%</td><td>55</td><td>3</td><td>$87.11</td><td>$73.59</td></tr>
+<tr><td>全体（含单次/半年包）</td><td>3,373</td><td>18.4%</td><td>35</td><td>6</td><td>$95.55</td><td>$109.41</td></tr>
     </tbody>
   </table>
   </div>
@@ -151,11 +151,11 @@
       </tr>
     </thead>
     <tbody class="num">
-<tr><td>9.9</td><td>$86.65</td><td>$96.98</td><td class="neg">$-10.33</td><td>未回本（渐近≈$99）</td></tr>
-<tr><td>19.9</td><td>$98.19</td><td>$140.28</td><td class="neg">$-42.09</td><td>未回本（渐近≈$128）</td></tr>
-<tr><td>39.9</td><td>$116.58</td><td>$223.23</td><td class="neg">$-106.65</td><td>观察期第8期 / D+49</td></tr>
-<tr><td>周订混合</td><td>$95.87</td><td>$134.23</td><td class="neg">$-38.36</td><td>未回本（渐近≈$128）</td></tr>
-<tr><td>99.9 单次</td><td>$87.12</td><td>$86.41</td><td class="pos">$+0.71</td><td>未回本（渐近≈$86）</td></tr>
+<tr><td>9.9</td><td>$87.28</td><td>$97.70</td><td class="neg">$-10.42</td><td>未回本（渐近≈$99）</td></tr>
+<tr><td>19.9</td><td>$98.86</td><td>$141.14</td><td class="neg">$-42.28</td><td>未回本（渐近≈$131）</td></tr>
+<tr><td>39.9</td><td>$120.23</td><td>$235.32</td><td class="neg">$-115.09</td><td>观察期第8期 / D+49</td></tr>
+<tr><td>周订混合</td><td>$96.36</td><td>$135.08</td><td class="neg">$-38.72</td><td>未回本（渐近≈$131）</td></tr>
+<tr><td>99.9 单次</td><td>$87.11</td><td>$86.41</td><td class="pos">$+0.70</td><td>未回本（渐近≈$86）</td></tr>
     </tbody>
   </table>
   </div>
@@ -171,12 +171,12 @@
       <tr><th>产品</th><th>回本%</th><th>已回本中位天</th><th>人均期末净收</th><th>未回本人均缺口</th></tr>
     </thead>
     <tbody class="num">
-<tr><td>9.9</td><td>19.9%</td><td>35</td><td>$90.16</td><td>$126.58</td></tr>
-<tr><td>19.9</td><td>24.8%</td><td>28</td><td>$102.16</td><td>$115.57</td></tr>
-<tr><td>39.9</td><td>24.4%</td><td>28</td><td>$121.29</td><td>$88.45</td></tr>
-<tr><td>周订混合</td><td>23.7%</td><td>28</td><td>$99.75</td><td>$117.14</td></tr>
-<tr><td>99.9 单次</td><td>0.7%</td><td>55</td><td>$90.65</td><td>$70.09</td></tr>
-<tr><td>全体含99.9</td><td>21.7%</td><td>28</td><td>$98.95</td><td>$111.89</td></tr>
+<tr><td>9.9</td><td>19.9%</td><td>35</td><td>$90.81</td><td>$126.58</td></tr>
+<tr><td>19.9</td><td>24.8%</td><td>28</td><td>$102.86</td><td>$115.35</td></tr>
+<tr><td>39.9</td><td>25.3%</td><td>28</td><td>$125.09</td><td>$86.33</td></tr>
+<tr><td>周订混合</td><td>23.7%</td><td>28</td><td>$100.26</td><td>$117.02</td></tr>
+<tr><td>99.9 单次</td><td>0.7%</td><td>55</td><td>$90.64</td><td>$70.09</td></tr>
+<tr><td>全体含99.9</td><td>21.6%</td><td>28</td><td>$99.42</td><td>$111.81</td></tr>
     </tbody>
   </table>
   </div>
@@ -195,12 +195,12 @@
 
   <h2>8. 一句话给业务</h2>
   <div class="callout">
-    在 CAC $160、take <strong>0.865</strong>（手续费+退款+拒付/预警）下：周订混合约 <strong>19.8%</strong> 用户能在观察期内回本（已回本中位约 <strong>35 天 / 第 6 笔</strong>）；
-    队列人均净收仍约 <strong>$86.65–$116.58</strong>（19.9 <strong>$98.19</strong> · 39.9 <strong>$116.58</strong> · 周订混合 <strong>$95.87</strong>），低于获客成本。评估投流请以<strong>实际路径人均 LTV @0.865</strong>为主，勿把「期望曲线第 N 期回本」理解成全体用户都能回本。
+    在 CAC $160、take <strong>0.865</strong>（手续费+退款+拒付/预警）下：周订混合约 <strong>20.1%</strong> 用户能在观察期内回本（已回本中位约 <strong>35 天 / 第 6 笔</strong>）；
+    队列人均净收仍约 <strong>$87.28–$120.23</strong>（19.9 <strong>$98.86</strong> · 39.9 <strong>$120.23</strong> · 周订混合 <strong>$96.36</strong>），低于获客成本。评估投流请以<strong>实际路径人均 LTV @0.865</strong>为主，勿把「期望曲线第 N 期回本」理解成全体用户都能回本。
   </div>
 
   <div class="footer">
-    生成时间：2026-10-21 10:13 Asia/Shanghai · 内部分享稿 · 数字来自平台订单 + PayerMax 对账财务模型<br/>
+    生成时间：2026-10-22 10:08 Asia/Shanghai · 内部分享稿 · 数字来自平台订单 + PayerMax 对账财务模型<br/>
     详细过程与用户级明细见同目录 <code>payback_actual_path.md</code> / <code>payback_cac160.md</code>
   </div>
 
