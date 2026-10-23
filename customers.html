@@ -618,7 +618,7 @@ function renderBanner() {
     <span class="warn">⚠ 订阅状态/黑名单为 MMC 查询快照（按 UID 复制到各路径行），可晚于对齐窗截止。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
-    · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；无 MMC 订阅记录显示为「收单」；若全空请强刷清缓存）。
+    · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；无 MMC 订阅记录保持空白，不自动填「收单」；若全空请强刷清缓存）。
     生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
     · 路径行 <b>${m.n_customers||'—'}</b>
     · 去重 UID <b>${m.n_unique_uids||'—'}</b>
@@ -744,8 +744,7 @@ fetch('stock_customers.json?v=' + encodeURIComponent((window.__SC_V || Date.now(
     // ensure new keys exist client-side even on older JSON
     for (const r of ALL) {
       const st = r['订阅状态'];
-      if (st == null || String(st).trim() === '') r['订阅状态'] = '收单';
-      else r['订阅状态'] = String(st).trim();
+      r['订阅状态'] = (st == null) ? '' : String(st).trim();
       if (r['是否黑名单'] == null) r['是否黑名单'] = '';
     }
     renderBanner();
