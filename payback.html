@@ -79,7 +79,7 @@
 
   <div class="callout">
     <strong>主推荐：实际付款路径法 · take = 0.865（全成本）。</strong>
-    按每条首购路径（UID+VIP）真实成功到账累加净收，看何时首次 ≥ $160。
+    按每条路径真实成功到账累加净收，看何时首次 ≥ $160。订阅路径=UID+VIP；周价单次/收单与99.9单次=一笔一路径。
     敏感性 take = 0.900（仅手续费+退款）见第 6 节。连环期望曲线见对照表，易偏乐观。
   </div>
 
@@ -89,7 +89,7 @@
       <li><strong>获客成本（CAC）</strong>：$160 / 人</li>
       <li><strong>净收 take（主口径）</strong>：<strong>0.865</strong> ≈ 毛收 × (1 − 手续费 4.83% − 退款约 4.88% − 拒付/预警约 3.74%)，来自 PayerMax 对账校准窗 <strong>2026-06-05 ~ 2026-10-15</strong></li>
       <li><strong>敏感性</strong>：若不扣拒付/预警，take ≈ <strong>0.900</strong>（仅手续费+退款）</li>
-      <li><strong>首购定义</strong>：平台订单 <code>状态=已支付</code> 且 <code>首购标记=首购</code>；粒度 = <strong>首购路径（UID + VIP套餐编码）</strong>，与存量客户一致。同一 UID 多笔首购（如周订+周价单次）各开路径，不「一人只取最早」</li>
+      <li><strong>首购/路径定义</strong>：平台已支付。粒度混合 — <b>订阅</b>=UID+VIP套餐编码（与存量一致）；<b>周价单次/收单 · 99.9单次</b>=一笔一路径（独立收单，含平台误标「续费」）。同一 UID 周订+周价单次各开路径，不「一人只取最早」</li>
       <li><strong>续订价</strong>：观察期内周订续费多为 $39.9</li>
       <li><strong>数据 as_of</strong>：2026-10-23（订单全量导出；对账费率来自校准窗 <strong>2026-06-05 ~ 2026-10-15</strong>，take <strong>0.865</strong> / 0.900）</li>
     </ul>
@@ -128,16 +128,20 @@
     </thead>
     <tbody class="num">
 <tr><td>9.9</td><td>498</td><td>19.9%</td><td>35</td><td>6</td><td>$87.08</td><td>$128.43</td></tr>
+<tr><td>14.9</td><td>58</td><td>0.0%</td><td>—</td><td>—</td><td>$13.48</td><td>$146.52</td></tr>
 <tr><td><strong>19.9（主力）</strong></td><td>2,459</td><td><strong>20.3%</strong></td><td>35</td><td>6</td><td>$98.84</td><td>$110.88</td></tr>
+<tr><td>29.9</td><td>1</td><td>100.0%</td><td>28</td><td>5</td><td>$163.92</td><td>$0.00</td></tr>
 <tr><td>39.9</td><td>91</td><td>26.4%</td><td>28</td><td>5</td><td>$120.99</td><td>$89.94</td></tr>
 <tr><td>周订混合</td><td>3,107</td><td>20.1%</td><td>35</td><td>6</td><td>$96.03</td><td>$113.97</td></tr>
-<tr><td>周价单次/收单</td><td>96</td><td>0.0%</td><td>—</td><td>—</td><td>$17.30</td><td>$142.70</td></tr>
-<tr><td>99.9（单次+半年）</td><td>300</td><td>0.3%</td><td>44</td><td>2</td><td>$86.70</td><td>$73.59</td></tr>
-<tr><td>全体（含单次/半年包）</td><td>3,503</td><td>17.8%</td><td>35</td><td>6</td><td>$93.08</td><td>$110.73</td></tr>
+<tr><td>周价单次/收单</td><td>97</td><td>0.0%</td><td>—</td><td>—</td><td>$17.12</td><td>$142.88</td></tr>
+<tr><td>99.9 单次</td><td>249</td><td>0.0%</td><td>—</td><td>—</td><td>$86.41</td><td>$73.59</td></tr>
+<tr><td>99.9 半年包</td><td>52</td><td>0.0%</td><td>—</td><td>—</td><td>$86.41</td><td>$73.59</td></tr>
+<tr><td>99.9合计（单次+半年）</td><td>301</td><td>0.0%</td><td>—</td><td>—</td><td>$86.41</td><td>$73.59</td></tr>
+<tr><td>全体（含单次/半年包）</td><td>3,505</td><td>17.8%</td><td>35</td><td>6</td><td>$93.02</td><td>$110.72</td></tr>
     </tbody>
   </table>
   </div>
-  <p class="muted" style="font-size:0.85rem">说明：路径数 = UID+VIP 首购路径（非一人最早）；中位天数/笔数仅统计<strong>已经回本</strong>的那部分路径；未回本会把「路径人均净收」拉到 CAC 以下。</p>
+  <p class="muted" style="font-size:0.85rem">说明：订阅路径数=UID+VIP；周价单次/99.9单次路径数=订单笔数。中位天数/笔数仅统计<strong>已经回本</strong>的那部分路径；未回本会把「路径人均净收」拉到 CAC 以下。表序：分档 → 周订混合 → 周价单次 → 99.9单次/半年包 → 合计。</p>
 
   <h2>5. 与旧法偏差（人均净收对比 · take 0.865）</h2>
   <div class="scroll">
@@ -156,7 +160,8 @@
 <tr><td>19.9</td><td>$98.84</td><td>$145.39</td><td class="neg">$-46.55</td><td>未回本（渐近≈$135）</td></tr>
 <tr><td>39.9</td><td>$120.99</td><td>$236.96</td><td class="neg">$-115.97</td><td>观察期第8期 / D+49</td></tr>
 <tr><td>周订混合</td><td>$96.03</td><td>$137.89</td><td class="neg">$-41.86</td><td>未回本（渐近≈$134）</td></tr>
-<tr><td>99.9 单次</td><td>$86.70</td><td>$86.41</td><td class="pos">$+0.29</td><td>未回本（渐近≈$86）</td></tr>
+
+
     </tbody>
   </table>
   </div>
@@ -173,12 +178,16 @@
     </thead>
     <tbody class="num">
 <tr><td>9.9</td><td>19.9%</td><td>35</td><td>$90.61</td><td>$127.15</td></tr>
+<tr><td>14.9</td><td>0.0%</td><td>—</td><td>$14.03</td><td>$145.97</td></tr>
 <tr><td>19.9</td><td>24.6%</td><td>28</td><td>$102.84</td><td>$115.27</td></tr>
+<tr><td>29.9</td><td>100.0%</td><td>28</td><td>$170.55</td><td>$0.00</td></tr>
 <tr><td>39.9</td><td>26.4%</td><td>28</td><td>$125.88</td><td>$87.11</td></tr>
 <tr><td>周订混合</td><td>23.5%</td><td>28</td><td>$99.92</td><td>$117.22</td></tr>
-<tr><td>周价单次</td><td>0.0%</td><td>—</td><td>$18.00</td><td>$142.00</td></tr>
-<tr><td>99.9 单次</td><td>0.3%</td><td>44</td><td>$90.21</td><td>$70.09</td></tr>
-<tr><td>全体含99.9</td><td>20.9%</td><td>28</td><td>$96.84</td><td>$112.99</td></tr>
+<tr><td>周价单次/收单</td><td>0.0%</td><td>—</td><td>$17.82</td><td>$142.18</td></tr>
+<tr><td>99.9 单次</td><td>0.0%</td><td>—</td><td>$89.91</td><td>$70.09</td></tr>
+<tr><td>99.9 半年包</td><td>0.0%</td><td>—</td><td>$89.91</td><td>$70.09</td></tr>
+<tr><td>99.9合计（单次+半年）</td><td>0.0%</td><td>—</td><td>$89.91</td><td>$70.09</td></tr>
+<tr><td>全体（含单次/半年包）</td><td>20.8%</td><td>28</td><td>$96.79</td><td>$112.98</td></tr>
     </tbody>
   </table>
   </div>
@@ -189,7 +198,7 @@
     <ul class="assumptions">
       <li><strong>不是每条路径都回本</strong>：观察期内仅一部分路径净收 ≥ CAC；其余把路径人均拉低，投流 LTV 应用「路径人均 / 分位数」而非「已回本中位数」当全体预期。</li>
       <li><strong>观察期截断</strong>：新用户观察天数短，尚未走完续订生命周期；回本% 会随时间上修，但未必能到 100%。</li>
-      <li><strong>多路径</strong>：同一 UID 多笔「首购」按 UID+VIP 各计路径（周价单次与周订可并存）；续费挂回同 VIP 链。平台标识与「通道近似」可能不一致（见续订看板切换）。</li>
+      <li><strong>多路径</strong>：同一 UID 订阅多笔「首购」按 UID+VIP 各计路径；周价单次/99.9单次每笔独立成路径（可与周订并存）。订阅续费挂回同 VIP 链。平台标识与「通道近似」可能不一致（见续订看板切换）。</li>
       <li><strong>39.9 样本量小</strong>，波动大，外推结论需谨慎。</li>
       <li><strong>单次 99.9</strong>：订单订阅周期=YEAR；非订阅；单笔净收约 $86（@0.865），单靠首笔盖不住 $160。<strong>半年包 99.9</strong>：订阅周期=MONTH（与 PayerMax 6 MONTH VIP 对齐），为订阅产品。</li>
     </ul>
@@ -199,11 +208,11 @@
   <div class="callout">
     在 CAC $160、take <strong>0.865</strong>（手续费+退款+拒付/预警）下：周订混合约 <strong>20.1%</strong> 路径能在观察期内回本（已回本中位约 <strong>35 天 / 第 6 笔</strong>）；
     队列人均净收仍约 <strong>$87.08–$120.99</strong>（19.9 <strong>$98.84</strong> · 39.9 <strong>$120.99</strong> · 周订混合 <strong>$96.03</strong>），低于获客成本。评估投流请以<strong>实际路径人均 LTV @0.865</strong>为主，勿把「期望曲线第 N 期回本」理解成全体用户都能回本。<br/>
-    <strong style="color:var(--warn)">周价单次/收单</strong>（VIP 含 ONETIME 或摘要含「充值」，首购 n=96）已从周订混合/周续订剥离，不进续费锚点；见续订看板「单次/半年包/周价单次」页。
+    <strong style="color:var(--warn)">周价单次/收单</strong>（VIP 含 ONETIME 或摘要含「充值」，首购 n=97）已从周订混合/周续订剥离，不进续费锚点；见续订看板「单次/半年包/周价单次」页。
   </div>
 
   <div class="footer">
-    生成时间：2026-10-23 16:42 Asia/Shanghai · 内部分享稿 · 数字来自平台订单 + PayerMax 对账财务模型<br/>
+    生成时间：2026-10-23 16:54 Asia/Shanghai · 内部分享稿 · 数字来自平台订单 + PayerMax 对账财务模型<br/>
     详细过程与用户级明细见同目录 <code>payback_actual_path.md</code> / <code>payback_cac160.md</code>
   </div>
 
