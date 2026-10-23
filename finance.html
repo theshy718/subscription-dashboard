@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>财务模型 · 全量订单（take 外推）</title>
 <style>
-body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:24px;max-width:1100px;color:#e7ecf3;background:#0f1419}
+body{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;margin:0;color:#e7ecf3;background:#0f1419}
+.wrap{max-width:1100px;margin:0 auto;padding:24px 20px 64px}
 h1{font-size:1.4rem} h2{font-size:1.15rem;margin-top:1.6em;border-bottom:1px solid #2d3a4f;padding-bottom:6px}
 h3{font-size:1rem;margin-top:1.2em;color:#c5d0e0}
 table{border-collapse:collapse;width:100%;background:#1a2332;margin:8px 0 16px}
@@ -31,6 +32,7 @@ a{color:#3b82f6}
 </style>
 </head>
 <body>
+<div class="wrap">
 <nav class="site-nav" aria-label="站点导航"><span class="brand">订阅数据看板</span><a href="index.html">续订看板</a><a href="payback.html">回本分析</a><a href="finance.html" class="active">财务模型</a><a href="customers.html">存量客户</a></nav>
 <p><a class="cta" href="customers.html">打开存量客户看板 →</a></p>
 <h1>投流财务模型 · 全量平台订单</h1>
@@ -90,4 +92,5 @@ a{color:#3b82f6}
 <tr><td>含拒付/预警</td><td>0.865</td><td>账单窗实测 final_net/GMV（本窗 0.865，取整为 0.865）</td></tr>
 </table>
 <p class="note">本页静态摘要 · 生成 2026-10-23 16:54 Asia/Shanghai · 对账 join 账单窗 2026-06-05 ~ 2026-10-21；全量页用校准 take 0.900/0.865 外推。</p>
+</div>
 </body></html>
