@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-23T15:33:04.234417+08:00",
+  "generated_at": "2026-10-23T16:12:03.441677+08:00",
   "orders_file": "/home/box/Downloads/orders-2026-10-23.csv",
   "payermax_file": "/workspace/finance-model/out/payermax_all.csv.gz",
   "as_of_start": "2026-06-05 00:00:00",
@@ -78,9 +78,161 @@
     "扣费失败手续费：FAILED PAYMENT/MIP 的 -txn_fee，经路径分摊",
     "退款金额：REFUND SUCCESS 的 |Txn Amount|；退款附加费单独列并从净收益扣减",
     "拒付预警费：CHARGE_BACK* 的 -Net Amount",
-    "订阅状态/是否黑名单：按 UID left-join MMC 快照，复制到该 UID 各路径行；无记录→空（不自动填「收单」）",
+    "订阅状态=MMC订阅计划 ∩ MMC订单交易类型(PAYMENT=收单 / MIP+plan trade_desc=订阅) 多重验证；有计划但 payin 仅 PAYMENT→收单；无计划且无 MIP 计划证据→收单；不把 UID 级状态抄到收单路径",
     "不改 CAC($160) / 不改 cohort 续订公式 / 不改净收益公式项"
   ],
+  "path_subscription_status": {
+    "n_shoudan": 344,
+    "n_matched_plan": 3091,
+    "n_onetime_paths": 59,
+    "n_conflict_plan_vs_payment": 9,
+    "n_mip_trade_desc_sub_without_plan_row": 0,
+    "n_paths_with_payin_evidence": 3433,
+    "conflict_examples": [
+      {
+        "uid": "161631",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMIbf38e16e63d240aab1167c652d472a7e"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "165344",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMI2b9def4385ef41da87a55def02b18b6d"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "166264",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMIe52a8dcf6ccb427aa5ca6f2e89b7281b"
+        ],
+        "mmc_plans": [
+          "1 WEEK",
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "178451",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMIffdd880da7e4490d8825ac67194ddabf"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "178778",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMI1d98012a324048babee4c75b940ac3fc"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "185358",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMI97c090fb59474e28a064e7b04fde5746"
+        ],
+        "mmc_plans": [
+          "1 WEEK",
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "247313",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMI5c41a0470eb540d988cc57bc9ca1d0c3"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "381237",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMIabdcc5b5d52c4339ab8ba167c9f6a300"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      },
+      {
+        "uid": "348554",
+        "vip": "VIP_WEEK",
+        "reason": "plan_match_but_payin_PAYMENT_only",
+        "payment_descs": [
+          "PAYERMAX|pr=PMI8300a46e65e1428dbab1b59492582565"
+        ],
+        "mmc_plans": [
+          "1 WEEK"
+        ]
+      }
+    ],
+    "vip_to_plan_map": {
+      "VIP_WEEK": [
+        "1 WEEK"
+      ],
+      "VIP_WEEK2": [
+        "1 WEEK2"
+      ],
+      "VIP_WEEK3": [
+        "1 WEEK3"
+      ],
+      "VIP_WEEK_RETENTION": [
+        "RETENTION 1 WEEK"
+      ],
+      "VIP_WEEK_RETENTION2": [
+        "RETENTION 1 WEEK"
+      ],
+      "VIP_WEEK_199_RETENTION": [
+        "RETENTION 1 WEEK"
+      ],
+      "VIP_WEEK_199_USD": [
+        "1 WEEK"
+      ],
+      "VIP_MONTH": [
+        "MONTHLY VIP"
+      ],
+      "VIP_MONTH_USD": [
+        "MONTHLY VIP"
+      ],
+      "VIP_SEMI_YEAR_USD": [
+        "6 MONTH VIP"
+      ],
+      "VIP_YEAR": [
+        "6 MONTH VIP"
+      ]
+    },
+    "rule": "订阅状态=MMC订阅计划 ∩ MMC订单交易类型(PAYMENT=收单 / MERCHANT_INITIATED_PAYMENT+plan trade_desc=订阅) 多重验证；冲突(有计划但 payin 仅 PAYMENT)→收单",
+    "sources": {
+      "plans": "subscription_plans*.xlsx Plan Name ↔ VIP",
+      "orders_txn_type": "payermax_all.csv.gz txn_type + trade_desc (=MMC 订单查询 交易类型)"
+    },
+    "skipped": false
+  },
   "dual_source": {
     "matched_trade_ids": 10481,
     "platform_only_trade_ids": 6656,

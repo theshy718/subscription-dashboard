@@ -615,10 +615,10 @@ function renderBanner() {
     <b>一行=一条首购计划路径</b>（UID + VIP套餐编码；同 UID 多计划 → 多行）·
     存量 UID=对齐窗内≥1 已支付 · 次数/费用按路径分摊（PayerMax 为主、平台补缺口）·
     <b>不改 CAC($160)</b> / 不改 cohort 续订公式 / 不改净收益公式项。<br/>
-    <span class="warn">⚠ 订阅状态/黑名单为 MMC 查询快照（按 UID 复制到各路径行），可晚于对齐窗截止。</span><br/>
+    <span class="warn">⚠ 订阅状态=MMC订阅计划 ∩ MMC订单交易类型(PAYMENT=收单 / MIP=订阅) 多重验证；冲突偏好收单；黑名单仍按 UID；快照可晚于对齐窗截止。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
-    · <b>订阅状态 / 是否黑名单</b> 来自 PayerMax MMC（列头 ▼ 可筛选；无 MMC 订阅记录保持空白，不自动填「收单」；若全空请强刷清缓存）。
+    · <b>订阅状态</b> 按路径多重验证：MMC 订阅计划（Plan Name↔VIP）∩ MMC订单/payin 交易类型（PAYMENT / top-up / PAYERMAX|pr= →「收单」；MIP+计划名 trade_desc → 订阅状态）。有计划但 payin 仅 PAYMENT →「收单」。不把 UID 级状态抄到收单路径。<b>是否黑名单</b> 仍按 UID。列头 ▼ 可筛选；若全空请强刷清缓存。
     生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
     · 路径行 <b>${m.n_customers||'—'}</b>
     · 去重 UID <b>${m.n_unique_uids||'—'}</b>
