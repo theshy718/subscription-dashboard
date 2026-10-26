@@ -1,119 +1,147 @@
 {
-  "generated_at": "2026-10-23T15:33:14.289248+08:00",
+  "generated_at": "2026-10-26T15:15:32.694727+08:00",
   "n": 14,
-  "source": "card_blacklist_20261023.xlsx",
+  "source": "card_blacklist_20261026.xlsx",
   "rows": [
     {
-      "card": "653949****2475",
-      "state": "effected",
+      "record": "653949****2475",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-23 06:06:52",
+      "creation time": "2026-10-23 06:06:52",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "653949****5775",
-      "state": "effected",
+      "record": "653949****5775",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-20 07:41:00",
+      "creation time": "2026-10-20 07:41:00",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "535366****0712",
-      "state": "effected",
+      "record": "535366****0712",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-15 07:27:45",
+      "creation time": "2026-10-15 07:27:45",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "481896****2116",
-      "state": "effected",
+      "record": "481896****2116",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-15 07:22:52",
+      "creation time": "2026-10-15 07:22:52",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "522355****8556",
-      "state": "effected",
+      "record": "522355****8556",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-10 06:22:10",
+      "creation time": "2026-10-10 06:22:10",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "520954****3026",
-      "state": "effected",
+      "record": "520954****3026",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-10-07 07:06:59",
+      "creation time": "2026-10-07 07:06:59",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "544919****5352",
-      "state": "effected",
+      "record": "544919****5352",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-30 06:20:34",
+      "creation time": "2026-09-30 06:20:34",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "535398****7547",
-      "state": "effected",
+      "record": "535398****7547",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-30 06:19:01",
+      "creation time": "2026-09-30 06:19:01",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "534999****8570",
-      "state": "effected",
+      "record": "534999****8570",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-29 11:27:01",
+      "creation time": "2026-09-29 11:27:01",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "553003****2833",
-      "state": "effected",
+      "record": "553003****2833",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-24 06:25:02",
+      "creation time": "2026-09-24 06:25:02",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "475824****4617",
-      "state": "effected",
+      "record": "475824****4617",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-24 03:34:02",
+      "creation time": "2026-09-24 03:34:02",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "517604****5728",
-      "state": "effected",
+      "record": "517604****5728",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-23 07:10:36",
+      "creation time": "2026-09-23 07:10:36",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "516310****9607",
-      "state": "effected",
+      "record": "516310****9607",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-21 11:25:42",
+      "creation time": "2026-09-21 11:25:42",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     },
     {
-      "card": "414720****2333",
-      "state": "effected",
+      "record": "414720****2333",
       "operator": "1903274266@qq.com",
-      "creation_time": "2026-09-20 05:13:38",
+      "creation time": "2026-09-20 05:13:38",
       "deadline": "-",
-      "remark": "nan"
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
     }
   ]
 }
