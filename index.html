@@ -694,16 +694,6 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
         renderOpsSpend();
       });
     });
-    const tbody = table.querySelector('tbody');
-    tbody.innerHTML = rows.map(r=>{
-      const ok = r.complete ? '✓' : '未齐';
-      const style = r.complete ? '' : ' style="opacity:.65"';
-      return `<tr${style}><td>${r.mt_day}</td><td>${opsMoney(r['郭海涛_消耗'])}</td><td>${opsInt(r['郭海涛_单数'])}</td><td>${opsMoney(r['郭海涛_单笔均本'])}</td>`+
-        `<td>${opsMoney(r['朱惠泽_消耗'])}</td><td>${opsInt(r['朱惠泽_单数'])}</td><td>${opsMoney(r['朱惠泽_单笔均本'])}</td>`+
-        `<td>${opsMoney(r['熊双双_消耗'])}</td><td>${opsInt(r['熊双双_单数'])}</td><td>${opsMoney(r['熊双双_单笔均本'])}</td>`+
-        `<td>${opsMoney(r['总消耗'])}</td><td>${opsInt(r['实际总单数'])}</td><td>${opsMoney(r['总金额'])}</td><td>${opsMoney(r['总单笔均本'])}</td>`+
-        `<td>${opsRoi(r['总roi'])}</td><td>${opsInt(r['差额单'])}</td><td>${ok}</td></tr>`;
-    }).join('');
     function sumKey(k){ return rows.reduce((a,r)=>a+(Number(r[k])||0),0); }
     const sGht=sumKey('郭海涛_消耗'), nGht=sumKey('郭海涛_单数');
     const sZhz=sumKey('朱惠泽_消耗'), nZhz=sumKey('朱惠泽_单数');
@@ -712,15 +702,29 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
     const avg = (s,n)=> n>0 ? s/n : null;
     const avgGht=avg(sGht,nGht), avgZhz=avg(sZhz,nZhz), avgXss=avg(sXss,nXss), avgTot=avg(sTot,nTot);
     const roiAll = sTot>0 ? (aTot/sTot*100) : null;
+    const sumCells =
+      `<td>${opsMoney(sGht)}</td><td>${opsInt(nGht||null)}</td><td>${opsMoney(avgGht)}</td>`+
+      `<td>${opsMoney(sZhz)}</td><td>${opsInt(nZhz||null)}</td><td>${opsMoney(avgZhz)}</td>`+
+      `<td>${opsMoney(sXss)}</td><td>${opsInt(nXss||null)}</td><td>${opsMoney(avgXss)}</td>`+
+      `<td>${opsMoney(sTot)}</td><td>${opsInt(nTot||null)}</td><td>${opsMoney(aTot)}</td><td>${opsMoney(avgTot)}</td>`+
+      `<td>${opsRoi(roiAll)}</td><td>${opsInt(dTot||null)}</td><td>—</td>`;
+    // 表头下吸顶汇总：个人总消耗 / 总订单 / 均本（随筛选窗变化）
+    const sumRow = `<tr class="summary-row"><td>汇总·个人</td>${sumCells}</tr>`;
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = sumRow + rows.map(r=>{
+      const ok = r.complete ? '✓' : '未齐';
+      const style = r.complete ? '' : ' style="opacity:.65"';
+      return `<tr${style}><td>${r.mt_day}</td><td>${opsMoney(r['郭海涛_消耗'])}</td><td>${opsInt(r['郭海涛_单数'])}</td><td>${opsMoney(r['郭海涛_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['朱惠泽_消耗'])}</td><td>${opsInt(r['朱惠泽_单数'])}</td><td>${opsMoney(r['朱惠泽_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['熊双双_消耗'])}</td><td>${opsInt(r['熊双双_单数'])}</td><td>${opsMoney(r['熊双双_单笔均本'])}</td>`+
+        `<td>${opsMoney(r['总消耗'])}</td><td>${opsInt(r['实际总单数'])}</td><td>${opsMoney(r['总金额'])}</td><td>${opsMoney(r['总单笔均本'])}</td>`+
+        `<td>${opsRoi(r['总roi'])}</td><td>${opsInt(r['差额单'])}</td><td>${ok}</td></tr>`;
+    }).join('');
     let tfoot = table.querySelector('tfoot');
     if(!tfoot){ tfoot=document.createElement('tfoot'); table.appendChild(tfoot); }
     tfoot.innerHTML = `<tr>
   <td>合计</td>
-  <td>${opsMoney(sGht)}</td><td>${opsInt(nGht||null)}</td><td>${opsMoney(avgGht)}</td>
-  <td>${opsMoney(sZhz)}</td><td>${opsInt(nZhz||null)}</td><td>${opsMoney(avgZhz)}</td>
-  <td>${opsMoney(sXss)}</td><td>${opsInt(nXss||null)}</td><td>${opsMoney(avgXss)}</td>
-  <td>${opsMoney(sTot)}</td><td>${opsInt(nTot||null)}</td><td>${opsMoney(aTot)}</td><td>${opsMoney(avgTot)}</td>
-  <td>${opsRoi(roiAll)}</td><td>${opsInt(dTot||null)}</td><td>—</td>
+  ${sumCells}
 </tr>`;
     const all = OPS.rows||[];
     const nC = all.filter(r=>r.complete).length;
