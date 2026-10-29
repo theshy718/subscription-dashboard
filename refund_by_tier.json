@@ -1,0 +1,110 @@
+{
+  "title": "退款率 · 分档",
+  "source": "customers/stock_customers.json",
+  "generated_at_stock": "2026-10-30T01:07:06.148980+08:00",
+  "as_of_start": "2026-06-05 00:00:00",
+  "as_of_end": "2026-10-28 23:59:59",
+  "as_of_end_exclusive": "2026-10-29 00:00:00",
+  "bill_day_min": 20260605,
+  "bill_day_max": 20261028,
+  "n_paths": 3660,
+  "window_note": "对齐窗 = PayerMax∩平台存量窗；bill_day 20260605–20261028；平台有效时间 [2026-06-05 00:00:00 , 2026-10-29 00:00:00) Asia/Shanghai。退款来自 PayerMax REFUND SUCCESS 挂回路径；平台订单本身无退款状态。",
+  "definition": {
+    "refund_rate_amt": "退款金额 / 已支付GMV（GMV=0 → —）",
+    "refund_path_share": "有退款路径数 / 路径数",
+    "grain": "存量一行=UID+VIP路径；退款金额=路径上 REFUND SUCCESS 合计"
+  },
+  "tiers": [
+    {
+      "tier": "9.9",
+      "paths": 503,
+      "paid_gmv": 51662.7,
+      "refund_amt": 4437.9,
+      "refund_rate_amt": 0.08590143372297615,
+      "refund_paths": 47,
+      "refund_path_share": 0.09343936381709742
+    },
+    {
+      "tier": "14.9",
+      "paths": 96,
+      "paid_gmv": 2188.5,
+      "refund_amt": 14.9,
+      "refund_rate_amt": 0.006808316198309345,
+      "refund_paths": 1,
+      "refund_path_share": 0.010416666666666666
+    },
+    {
+      "tier": "19.9",
+      "paths": 2648,
+      "paid_gmv": 303707.39,
+      "refund_amt": 14858.9,
+      "refund_rate_amt": 0.04892505249872253,
+      "refund_paths": 192,
+      "refund_path_share": 0.07250755287009064
+    },
+    {
+      "tier": "29.9",
+      "paths": 3,
+      "paid_gmv": 249.3,
+      "refund_amt": 0.0,
+      "refund_rate_amt": 0.0,
+      "refund_paths": 0,
+      "refund_path_share": 0.0
+    },
+    {
+      "tier": "39.9",
+      "paths": 93,
+      "paid_gmv": 13925.1,
+      "refund_amt": 119.7,
+      "refund_rate_amt": 0.008595988538681949,
+      "refund_paths": 3,
+      "refund_path_share": 0.03225806451612903
+    },
+    {
+      "tier": "99.9单次",
+      "paths": 248,
+      "paid_gmv": 24875.1,
+      "refund_amt": 199.8,
+      "refund_rate_amt": 0.008032128514056226,
+      "refund_paths": 2,
+      "refund_path_share": 0.008064516129032258
+    },
+    {
+      "tier": "99.9半年",
+      "paths": 63,
+      "paid_gmv": 6293.7,
+      "refund_amt": 199.8,
+      "refund_rate_amt": 0.03174603174603175,
+      "refund_paths": 2,
+      "refund_path_share": 0.031746031746031744
+    },
+    {
+      "tier": "other",
+      "paths": 6,
+      "paid_gmv": 11.94,
+      "refund_amt": 0.0,
+      "refund_rate_amt": 0.0,
+      "refund_paths": 0,
+      "refund_path_share": 0.0
+    }
+  ],
+  "total": {
+    "tier": "合计",
+    "paths": 3660,
+    "paid_gmv": 402913.73,
+    "refund_amt": 19831.0,
+    "refund_rate_amt": 0.04921897300446922,
+    "refund_paths": 247,
+    "refund_path_share": 0.06748633879781421
+  },
+  "meta_crosscheck": {
+    "sum_gmv": 402913.73,
+    "sum_refund": 19831.0,
+    "n_customers": 3660,
+    "drift": {
+      "gmv_vs_meta": 0.0,
+      "refund_vs_meta": 0.0
+    }
+  },
+  "note": "仅展示存量对齐窗内路径；不改 CAC/续订/净收益公式。"
+}
