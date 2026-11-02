@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-02T17:01:11.158992+08:00",
+  "generated_at": "2026-11-02T18:00:28.945975+08:00",
   "orders_file": "/home/box/Downloads/orders-2026-11-02.csv",
   "payermax_file": "/workspace/finance-model/out/payermax_all.csv.gz",
   "as_of_start": "2026-06-05 00:00:00",
@@ -86,7 +86,7 @@
     "n_matched_plan": 3375,
     "n_onetime_paths": 59,
     "n_conflict_plan_vs_payment": 9,
-    "n_mip_trade_desc_sub_without_plan_row": 9,
+    "n_mip_trade_desc_sub_without_plan_row": 0,
     "n_paths_with_payin_evidence": 3717,
     "conflict_examples": [
       {
