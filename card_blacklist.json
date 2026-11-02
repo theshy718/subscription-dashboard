@@ -1,9 +1,19 @@
 {
-  "generated_at": "2026-10-30T16:39:52.318003+08:00",
-  "n": 15,
-  "source": "card_blacklist_20261030.xlsx",
-  "as_of": "2026-10-30T16:40:00+08:00",
+  "generated_at": "2026-11-02T17:01:21.467218+08:00",
+  "n": 16,
+  "source": "card_blacklist_20261101.xlsx",
+  "as_of": "2026-11-01T00:00:00+08:00",
   "rows": [
+    {
+      "record": "499977****5432",
+      "operator": "1903274266@qq.com",
+      "creation time": "2026-10-30 09:22:59",
+      "deadline": "-",
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": null,
+      "merchantNo": "P01010121636976"
+    },
     {
       "record": "439466****0711",
       "operator": "1903274266@qq.com",
