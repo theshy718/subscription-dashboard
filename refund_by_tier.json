@@ -1,7 +1,7 @@
 {
   "title": "退款率 · 分档",
   "source": "customers/stock_customers.json",
-  "generated_at_stock": "2026-11-09T01:08:48.599205+08:00",
+  "generated_at_stock": "2026-11-10T14:16:41.893485+08:00",
   "as_of_start": "2026-06-05 00:00:00",
   "as_of_end": "2026-11-07 23:59:59",
   "as_of_end_exclusive": "2026-11-08 00:00:00",
