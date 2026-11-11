@@ -111,6 +111,7 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
     <button class="tab" data-tab="payback" type="button">回本 · CAC$160</button>
     <button class="tab" data-tab="opsSpend" type="button">投流消耗 · 记录</button>
     <button class="tab" data-tab="refundTier" type="button">退款率 · 分档</button>
+    <button class="tab" data-tab="cohortReal" type="button">真实续订率</button>
   </div>
   <div class="banner" id="main-banner">口径：<strong id="banner-mode">平台首购标记</strong> · <strong>全量订单 2026-06-05 ~ 2026-11-11</strong>（非账单窗）· 续订=同套餐链第2～N笔连续→39.9 · GMV $<strong>466,336.8</strong> · 重复首购 <strong>84</strong> 人 · 首购 9.9=<strong id="b-f99">498</strong> / 19.9=<strong id="b-f199">2832</strong> / 39.9=<strong id="b-f399">93</strong> / 单次99.9=<strong id="b-ann">249</strong> / 半年包=<strong id="b-semi">78</strong> / <strong style="color:#fbbf24">周价单次=<span id="b-wo">97</span></strong>（周价单次 19.9:89, 周价单次 29.9:2, 周价单次 39.9:1, 周价单次 9.9:5；通道=96）·（通道对照：9.9=498 / 19.9=2832 / 39.9=93 / 单=248 / 半=78）</div>
 
@@ -123,14 +124,7 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
     </div>
     <div class="table-wrap"><table id="cohort-table"><thead></thead><tbody></tbody></table></div>
     <p class="note">首单=平台<strong>已支付</strong>且<strong>首购标记=首购</strong>；产品档=该笔金额（9.9/14.9/19.9/29.9/39.9；$1.99不进档）。同用户多笔首购均按标识分别计入对应首购日。第N期(N≥2)=自该首购起路径长度≥N，且<strong>第2～N笔均为 39.9</strong>（连续；无第2则无第3；不用 ±1 天日历窗）。<strong>续费率%=实际路径成功n ÷ 够资格成熟首购d</strong>（够资格=观察日已成熟：首购日+7×(N−1)+1≤as_of；未成熟不进分母；<strong>不是</strong>无条件÷第1期全量）。单元格 <code>成功数（续费率%）</code>。汇总按产品分行，分母只加总够资格行。</p>
-    <div class="banner warn" id="cohort-real-banner" style="margin-top:18px">真实续订率（剔除已过期客户）· 与上方原续费率同一公式，但分子和分母都先去掉已过期路径 · 原续费率表和数字未改</div>
-    <div class="filters">
-      <span class="meta" id="cohort-real-meta"></span>
-    </div>
-    <div class="table-wrap"><table id="cohort-real-table"><thead></thead><tbody></tbody></table></div>
-    <p class="note">真实续订率%=实际路径成功n ÷ 够资格成熟首购d（够资格=观察日已成熟：首购日+7×(N−1)+1≤as_of；未成熟不进分母），与上方原续费率同一口径；区别仅在于分子和分母都先去掉订阅状态为已过期的客户路径。已过期以覆盖全部日期的官方 PayerMax 计划状态为准，不以漏扣周期推断。原续费率表和数字保持不动。不改 CAC / take / 净收益公式。</p>
-
-  </section>
+</section>
 
 <section id="panel-annual" class="panel">
     <div class="table-wrap"><table id="annual-table"><thead></thead><tbody></tbody></table></div>
@@ -206,6 +200,16 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
     <div class="table-wrap"><table id="refundTier-table"><thead></thead><tbody></tbody><tfoot></tfoot></table></div>
     <p class="note">口径：路径数=存量 UID+VIP 路径；<strong>真实生效中用户</strong>=订阅状态为生效中的去重 UID（不含已过期、不含收单）；<strong>剔除已过期后续订率</strong>=已续费次数≥1 且仍生效中的路径÷真实生效中路径。已过期以官方全日期计划状态为准，不以漏扣周期推断。已支付GMV / 退款金额=路径合计；退款率（金额）=退款金额÷已支付GMV。不改 CAC / 原 cohort 续费率 / 净收益公式。</p>
   </section>
+
+  <section id="panel-cohortReal" class="panel">
+    <div class="banner warn" id="cohort-real-banner">真实续订率（剔除已过期客户）· 与「总表 · 首购多期→39.9」中的原续费率同一公式，但分子和分母都先去掉已过期路径 · 原续费率表和数字未改</div>
+    <div class="filters">
+      <span class="meta" id="cohort-real-meta"></span>
+    </div>
+    <div class="table-wrap"><table id="cohort-real-table"><thead></thead><tbody></tbody></table></div>
+    <p class="note">真实续订率%=实际路径成功n ÷ 够资格成熟首购d（够资格=观察日已成熟：首购日+7×(N−1)+1≤as_of；未成熟不进分母），与原续费率同一口径；区别仅在于分子和分母都先去掉订阅状态为已过期的客户路径。已过期以覆盖全部日期的官方 PayerMax 计划状态为准，不以漏扣周期推断。原续费率表和数字保持不动。不改 CAC / take / 净收益公式。</p>
+  </section>
+
 
 
 </div>
