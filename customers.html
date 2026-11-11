@@ -138,7 +138,7 @@ tfoot td{position:sticky;bottom:0;background:var(--bg3);font-weight:700;border-t
 <div id="colFilterPop" role="dialog" aria-label="列筛选"></div>
 
 <script>
-window.__SC_V = '20261111-paid-period';
+window.__SC_V = '20261111-official-full';
 const MONEY = (v) => {
   if (v == null || Number.isNaN(+v)) return '—';
   const n = +v;
@@ -619,7 +619,7 @@ function renderBanner() {
     <span class="warn">⚠ 订阅状态=MMC订阅计划 ∩ MMC订单交易类型(PAYMENT=收单 / MIP=订阅) 多重验证；冲突偏好收单；黑名单仍按 UID；快照可晚于对齐窗截止。</span><br/>
     净收益公式：<b>${esc(m.net_formula || '已支付GMV − 已收取手续费 − 扣费失败手续费 − 退款金额 − 退款附加费 − 拒付预警费')}</b>
     · 退款附加费单独列，并从净收益中扣减。
-    · <b>订阅状态</b> 按路径多重验证：MMC 订阅计划（Plan Name↔VIP）∩ MMC订单/payin 交易类型（PAYMENT / top-up / PAYERMAX|pr= →「收单」；MIP+计划名 trade_desc → 订阅状态）。有计划但 payin 仅 PAYMENT →「收单」。不把 UID 级状态抄到收单路径。若计划仍为 Active/生效中，但最近一次成功支付加上扣费周期（周7/月31/半年183天）已结束，则校正为已过期。<b>是否黑名单</b> 仍按 UID。列头 ▼ 可筛选；若全空请强刷清缓存。
+    · <b>订阅状态</b> 按路径多重验证：MMC 订阅计划（Plan Name↔VIP）∩ MMC订单/payin 交易类型（PAYMENT / top-up / PAYERMAX|pr= →「收单」；MIP+计划名 trade_desc → 订阅状态）。有计划但 payin 仅 PAYMENT →「收单」。不把 UID 级状态抄到收单路径。订阅状态与 UID/卡号黑名单以覆盖全部日期的官方 PayerMax 导出为准，不以漏扣周期推断已过期。<b>是否黑名单</b> 仍按 UID。列头 ▼ 可筛选；若全空请强刷清缓存。
     生成 ${esc((m.generated_at||'').replace('T',' ').slice(0,19))} Asia/Shanghai
     · 路径行 <b>${m.n_customers||'—'}</b>
     · 去重 UID <b>${m.n_unique_uids||'—'}</b>
