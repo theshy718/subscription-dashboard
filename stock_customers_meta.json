@@ -79,7 +79,8 @@
     "退款金额：REFUND SUCCESS 的 |Txn Amount|；退款附加费单独列并从净收益扣减",
     "拒付预警费：CHARGE_BACK* 的 -Net Amount",
     "订阅状态=MMC订阅计划 ∩ MMC订单交易类型(PAYMENT=收单 / MIP+plan trade_desc=订阅) 多重验证；有计划但 payin 仅 PAYMENT→收单；无计划且无 MIP 计划证据→收单；不把 UID 级状态抄到收单路径；订阅状态与 UID/卡号黑名单以覆盖全部日期的官方 PayerMax/MMC 导出为准（含每日更新），不以漏扣一个计费周期推断已过期，也不做 30 天导出 keep-last 留下陈旧 Active",
-    "不改 CAC($160) / 不改 cohort 续订公式 / 不改净收益公式项"
+    "不改 CAC($160) / 不改 cohort 续订公式 / 不改净收益公式项",
+    "已过期时间=该路径最后一次发起支付（成功或失败都算；PayerMax PAYMENT/MIP 为主、平台已支付/失败/待支付补缺口），仅当订阅状态=已过期时填写。被拉黑时间=官方 UID 黑名单创建时间，仅当是否黑名单=是时填写。这两列不改变订阅状态判定（状态仍以覆盖全部日期的官方计划导出为准）。"
   ],
   "path_subscription_status": {
     "n_shoudan": 344,
@@ -252,5 +253,29 @@
     "sum_总订单次数": 118159,
     "priority": "PayerMax primary per plan-path (UID+VIP套餐), platform secondary",
     "row_grain": "UID + VIP套餐编码 (one stock row per first-purchase plan path)"
+  },
+  "expire_blacklist_times": {
+    "n_stock_paths": 4025,
+    "n_paths_with_last_attempt": 4025,
+    "n_pm_init_mapped": 116751,
+    "n_pm_init_unmapped": 2135,
+    "n_platform_init": 20650,
+    "n_last_attempt_from_pm_fail": 2669,
+    "n_last_attempt_from_plat_fail": 14,
+    "n_last_attempt_from_plat_pending": 0,
+    "userid_blacklist_file": "/workspace/subscription-cohort/customers/imports/userid_blacklist_20261110.xlsx",
+    "n_official_black": 300,
+    "n_official_black_effected_with_time": 300,
+    "n_official_black_effected_missing_time": 0,
+    "n_expired_paths": 347,
+    "n_expired_with_last_attempt": 347,
+    "n_expired_fallback_last_success": 0,
+    "n_expired_fallback_first_purchase": 0,
+    "n_expired_missing_time": 0,
+    "n_expired_last_attempt_after_last_success": 294,
+    "n_black_paths": 304,
+    "n_black_with_creation_time": 304,
+    "n_black_missing_creation_time": 0,
+    "rule": "已过期时间=该路径最后一次发起支付（PayerMax SUCCESS/FAILED PAYMENT/MIP 为主，平台 已支付/失败/待支付 补缺口）；仅当订阅状态=已过期时填写。被拉黑时间=官方 UID 黑名单 creation time（effected）；仅当是否黑名单=是时填写。"
   }
 }
