@@ -1,9 +1,19 @@
 {
-  "generated_at": "2026-11-09T17:12:48.967797+08:00",
-  "n": 16,
-  "source": "card_blacklist_20261109.xlsx",
-  "as_of": "2026-11-09T00:00:00+08:00",
+  "generated_at": "2026-11-16T16:01:43.159517+08:00",
+  "n": 17,
+  "source": "card_blacklist_20261116.xlsx",
+  "as_of": "2026-11-16T00:00:00+08:00",
   "rows": [
+    {
+      "record": "515676****3384",
+      "operator": "1903274266@qq.com",
+      "creation time": "2026-11-16 06:45:11",
+      "deadline": "-",
+      "state": "effected",
+      "remark": null,
+      "Sub MerchantNo": "",
+      "merchantNo": "P01010121636976"
+    },
     {
       "record": "499977****5432",
       "operator": "1903274266@qq.com",
@@ -11,7 +21,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -21,7 +31,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -31,7 +41,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -41,7 +51,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -51,7 +61,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -61,7 +71,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -71,7 +81,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -81,7 +91,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -91,7 +101,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -101,7 +111,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -111,7 +121,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -121,7 +131,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -131,7 +141,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -141,7 +151,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -151,7 +161,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     },
     {
@@ -161,7 +171,7 @@
       "deadline": "-",
       "state": "effected",
       "remark": null,
-      "Sub MerchantNo": null,
+      "Sub MerchantNo": "",
       "merchantNo": "P01010121636976"
     }
   ]
