@@ -288,6 +288,6 @@
     "card_blacklist": "card_blacklist_20261124.xlsx",
     "card_blacklist_as_of": "2026-11-24",
     "status_fresh": true,
-    "note": "订阅计划与 UID/卡号黑名单均为 2026-11-24 官方导出（计划 Created 至 2026-11-24 06:01:25，与导出时刻对齐）。"
+    "note": "订阅计划与 UID/卡号黑名单均为 2026-11-24 官方导出（计划 Created 至 2026-11-24 14:01:25（Asia/Shanghai；规范源为 06:01:25 UTC），与导出时刻对齐）。"
   }
 }
