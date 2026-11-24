@@ -1,49 +1,51 @@
 {
-  "package": "dashboard_stock_mmc_20261124_official",
-  "sc_v": "20261124-official",
-  "generated_at_stock": "2026-11-24T15:15:00.383507+08:00",
+  "package": "dashboard_overnight_2026-11-23",
+  "sc_v": "20261125-bill20261123",
+  "generated_at_stock": "2026-11-25T01:38:32.617440+08:00",
   "invariants": {
-    "n_customers": 4316,
-    "n_unique_uids": 4233,
-    "sum_net": 435213.07,
-    "bill_day_max": 20261122,
-    "as_of_end": "2026-11-22 23:59:59",
+    "n_customers": 4340,
+    "n_unique_uids": 4257,
+    "sum_net": 438652.59,
+    "sum_gmv": 518651.53,
+    "sum_refund": 27041.8,
+    "bill_day_max": 20261123,
+    "as_of_end": "2026-11-23 23:59:59",
     "blacklist_paths": 365,
     "blacklist_uids": 359,
     "card_blacklist_n": 17
   },
   "status_counts": {
-    "生效中": 3599,
-    "已过期": 373,
+    "生效中": 3623,
     "收单": 344,
+    "已过期": 373,
     "空白": 0
   },
-  "status_transitions_vs_a54474e": {
-    "空白->生效中": 144,
-    "生效中->已过期": 24,
-    "已过期->生效中": 5,
-    "unchanged": 4143
+  "status_transitions_vs_official_20261124": {
+    "new_paths": 24,
+    "gone": 0,
+    "existing_status_changes": 0,
+    "note": "all 24 new 11-23 first-purchase paths 生效中; existing paths unchanged vs dashboard_stock_mmc_20261124_official"
   },
   "files": [
     {
       "name": "customers.html",
-      "bytes": 35548,
-      "sha256": "c1211d770ab194de3b5cd20fe9053ea97260e3e48e3c908a726ffe3986f09695"
+      "bytes": 35599,
+      "sha256": "9488497d7ac83b7c68e244e251c68c7d5a925223f6f32f6f1b87258d1fd246e8"
     },
     {
       "name": "stock_customers.json",
-      "bytes": 2782170,
-      "sha256": "15d275782b4227a097b7fc6643b9e161e1e080ad6f1e83bd10c312216e2a9bf6"
+      "bytes": 2796772,
+      "sha256": "50827e9f3c8f8b6c8d3c92c4bdc29f3a4e4f5c95dca8e81124eff298f3046b74"
     },
     {
       "name": "stock_customers_meta.json",
-      "bytes": 11593,
-      "sha256": "0e063cda6905f43826fdf4d1e78324c67a9d77da251737ce0be068e088d016a1"
+      "bytes": 10701,
+      "sha256": "e2dfa59b13801cb8fb49ed246b522367932de900e73c446bb85c5d937966e466"
     },
     {
       "name": "stock_customers.csv",
-      "bytes": 839419,
-      "sha256": "fbc83ff19a5f85cca47c7392c94fe3ea50b557cf40ddddcaf5f43702bc418446"
+      "bytes": 844095,
+      "sha256": "4db3c91d913db9f9e305a9991aea7f17234f2b9e75c8f297144cdd93f0c9442d"
     },
     {
       "name": "card_blacklist.json",
@@ -52,43 +54,33 @@
     },
     {
       "name": "index.html",
-      "bytes": 2310558,
-      "sha256": "3e28bbad3504cf04051989aea622989a8afb5185475d32b9c00b8a9800912688"
+      "bytes": 2315138,
+      "sha256": "0f2fbc62b43c190ca55039167f872fb46ed0507d54afb086b963d8aa777e5c27"
+    },
+    {
+      "name": "payback.html",
+      "bytes": 15118,
+      "sha256": "541ef825e603764d36547af6c7b5cc4601e3dd8899c666350c08d0238d1e1b64"
+    },
+    {
+      "name": "finance.html",
+      "bytes": 10720,
+      "sha256": "937193fb4cbbfaeaa9089e8b6f86d7f8b21c58c1d1a40e705deab76d638b0d8b"
     },
     {
       "name": "refund_by_tier.json",
-      "bytes": 5060,
-      "sha256": "1ee2fb9091a838c34ac15e2b81041baa5ce5c9a90174a7e7b71439bea54cb8e4"
+      "bytes": 5064,
+      "sha256": "ef332f27b688dcb126bd930022c24909fb7923b72eed79a141abf557ea06e51d"
     },
     {
       "name": "refund_by_tier_embed.json",
-      "bytes": 3980,
-      "sha256": "2d3b320118115c573d42e71d87d9d56c1c6fc5607e80a5bd5590a6d6466e5952"
+      "bytes": 3984,
+      "sha256": "08b84d0dc5a66e27ea2ac2a44d1b96684b8713ce62aef363326e45344a534a38"
     },
     {
       "name": "real_renewal_rate.json",
-      "bytes": 1765028,
-      "sha256": "d07f4f785fbdf5a16a0de64110e5513ec844933706ecaf039fb032130aab0317"
+      "bytes": 1776679,
+      "sha256": "4a3d591bb3d15094f38092dd25b5bf621fb1a97ad39101cfa4f3f43276ecc1d1"
     }
-  ],
-  "do_not_touch": [
-    "ops.html",
-    "finance.html",
-    "payback.html",
-    "cohort pages other than index real/refund embeds"
-  ],
-  "index_original_blocks_unchanged": [
-    "DATA.summary",
-    "DATA.cohort",
-    "DATA.daily",
-    "DATA.channel",
-    "DATA.modes",
-    "DATA.annual",
-    "PAYBACK",
-    "OPS_SPEND"
-  ],
-  "index_updated_blocks": [
-    "DATA.realRenewal",
-    "REFUND_BY_TIER"
   ]
 }
