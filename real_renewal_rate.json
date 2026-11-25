@@ -3,7 +3,7 @@
   "as_of": "2026-11-25",
   "max_periods": 25,
   "qa": {
-    "n_stock_paths": 4340,
+    "n_stock_paths": 4367,
     "n_stock_expired_paths": 373,
     "n_stock_black_paths": 365,
     "n_stock_black_uids": 359,
@@ -12,9 +12,10 @@
     "n_official_userid_blacklist_effected": 360,
     "userid_blacklist_file": "/workspace/subscription-cohort/customers/imports/userid_blacklist_20261124.xlsx",
     "n_stock_status": {
-      "生效中": 3623,
+      "生效中": 3641,
       "已过期": 373,
-      "收单": 344
+      "收单": 344,
+      "": 9
     },
     "rule": "按时间点剔除：期数N的周期起点=首购日+7×(N-1)，若该起点晚于该路径已过期时间或被拉黑时间（取较早者），则该期不进分子和分母；是否成熟仍用 首购日+7×(N-1)+1≤as_of。已过期时间=最后一次发起支付（成功或失败）；被拉黑时间=官方 UID 黑名单 creation time。不在存量窗内的 cohort 首购回退官方状态。",
     "n_stock_expire_times": 373,
@@ -26,7 +27,7 @@
       "with_black_only": 324,
       "with_expire_and_black": 31,
       "with_any_cutoff": 695,
-      "fallback_not_in_stock": 39
+      "fallback_not_in_stock": 14
     },
     "channel_weekly_first_in": 3948,
     "channel_weekly_first_with_cutoff": 695,
@@ -35,7 +36,7 @@
       "with_black_only": 324,
       "with_expire_and_black": 31,
       "with_any_cutoff": 695,
-      "fallback_not_in_stock": 39
+      "fallback_not_in_stock": 14
     },
     "platform_period_slots": {
       "n_slots_kept": 38792,
