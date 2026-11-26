@@ -1,16 +1,16 @@
 {
-  "package": "dashboard_overnight_2026-11-24",
-  "sc_v": "20261126-bill20261124",
-  "generated_at_stock": "2026-11-26T01:32:00.001302+08:00",
-  "generated_at_pack": "2026-11-26T01:35:59.545952+08:00",
+  "package": "dashboard_overnight_2026-11-25",
+  "sc_v": "20261127-bill20261125",
+  "generated_at_stock": "2026-11-27T01:39:02.870434+08:00",
+  "generated_at_pack": "2026-11-27T01:44:53.797240+08:00",
   "invariants": {
-    "n_customers": 4367,
-    "n_unique_uids": 4284,
-    "sum_net": 441677.64,
-    "sum_gmv": 522954.73,
-    "sum_refund": 27575.4,
-    "bill_day_max": 20261124,
-    "as_of_end": "2026-11-24 23:59:59",
+    "n_customers": 4393,
+    "n_unique_uids": 4310,
+    "sum_net": 445078.54,
+    "sum_gmv": 527372.23,
+    "sum_refund": 27794.8,
+    "bill_day_max": 20261125,
+    "as_of_end": "2026-11-25 23:59:59",
     "blacklist_paths": 365,
     "blacklist_uids": 359,
     "card_blacklist_n": 17
@@ -18,75 +18,75 @@
   "status_counts": {
     "生效中": 3641,
     "收单": 344,
-    "已过期": 373,
-    "空白": 9
+    "已过期": 375,
+    "空白": 33
   },
-  "status_vs_bill20261123": {
-    "new_paths": 27,
+  "status_vs_bill20261124": {
+    "new_paths": 26,
     "gone": 0,
-    "delta_n": 27,
-    "delta_uid": 27,
-    "delta_net": 3025.05,
-    "delta_gmv": 4303.2,
-    "delta_refund": 533.6,
+    "delta_n": 26,
+    "delta_uid": 26,
+    "delta_net": 3400.9,
+    "delta_gmv": 4417.5,
+    "delta_refund": 219.4,
     "delta_status": {
-      "生效中": 18,
+      "生效中": 0,
       "收单": 0,
-      "已过期": 0,
-      "空白": 9
+      "已过期": 2,
+      "空白": 24
     },
-    "note": "27 new paths are 11-24 first purchases (5x14.9 + 20x19.9 + 2x99.9 semi). 9 blank are 11-24 first purchases after official plans snapshot Created cutoff 2026-11-24 14:01:25 Asia/Shanghai (2x VIP_WEEK_199_RETENTION $14.9, 7x VIP_WEEK $19.9). Not filled as active. MMC refresh still paused; plans/blacklist still 20261124."
+    "note": "26 new paths are all 11-25 first purchases (10x14.9 VIP_WEEK_199_RETENTION + 16x19.9 VIP_WEEK), matching that day's 26 first-purchase orders. 24 of them are blank (after official plans snapshot Created cutoff 2026-11-24 14:01:25 Asia/Shanghai, no current plan in subscription_plans_20261124). The previous 9 blank 11-24 first purchases remain blank. 2 new paths (UID 171793, 308319; both $14.9 VIP_WEEK_199_RETENTION, first paid 18:46 and 21:57 on 11-25) are 已过期 because the 20261124 snapshot already has EXPIRED 'Retention 1 WEEK' plans for those UIDs from mid-October; not inferred from payment cycle, not filled as 生效中. Existing paths have no status migration. MMC refresh still paused; plans/blacklist still 20261124. Official 11-26 payin is not available — do not invent that day."
   },
   "files": [
     {
       "name": "index.html",
-      "bytes": 2329567,
-      "sha256": "c4da900d637315639db3a09e31551f8bb0ec2ed20a6e8ed41b4804e8a309a070"
+      "bytes": 2344943,
+      "sha256": "1bafc5fa691bc97445cab5c6d588488260ab21e51c39b3581af3fc4680e42cb4"
     },
     {
       "name": "payback.html",
-      "bytes": 15118,
-      "sha256": "967d0e2ace9900b5b27aaa9cc49e2058821cc3e344aaa540e4eff21bc9158b8e"
+      "bytes": 15117,
+      "sha256": "7469a315542917583861632fa49f7157b64279faa49423e31551917eb5f81f4a"
     },
     {
       "name": "finance.html",
-      "bytes": 10711,
-      "sha256": "43e5a10401e7d08fc0fea1c4f8e4c123cf805f72cf2691c5e7fd856662469972"
+      "bytes": 10782,
+      "sha256": "bac426a33459cc95ff5ebf92ff925192eb26881175b22891368946b2adcc0b2d"
     },
     {
       "name": "customers.html",
       "bytes": 35599,
-      "sha256": "4c25f1f4f862607f716ac8d77afeceab8c9934e65f9c8ecd0b3226b4a6021ee4"
+      "sha256": "78b5c35a69d7641429f1937fff0cba4942d0a44d64269e90c07e8323c32bdd5a"
     },
     {
       "name": "stock_customers.json",
-      "bytes": 2813974,
-      "sha256": "4e208cae4b759ce376868a790e7d41f5f2b256cf4e40718fb6cd65d40d0d6e4b"
+      "bytes": 2830442,
+      "sha256": "31838f0a9cb50f6acef622a92bca4fdeacb3e2108c7a8f8d35ec680ceccdfc35"
     },
     {
       "name": "stock_customers.csv",
-      "bytes": 849201,
-      "sha256": "aecda25214195afa8d336a2ae6a96fd5051dea21e3e14b832ac9800773b7e950"
+      "bytes": 854020,
+      "sha256": "81db34867099c6828e1d7800a5396e85455de7c560ec53b88325681e473aa2ae"
     },
     {
       "name": "stock_customers_meta.json",
-      "bytes": 10701,
-      "sha256": "6d80ad2715efebe90c04aa1b8ade7859b85696311484a41d02445f2a1331c3c9"
+      "bytes": 10702,
+      "sha256": "6d591f5c57ecab1f4213622130dad7e93d70589b4b571d07cfb4977b2e873a08"
     },
     {
       "name": "refund_by_tier_embed.json",
       "bytes": 3979,
-      "sha256": "e0d832b2630847c24d9e573344090a6464c62dbc8dc8d05caf6c15b8418dc35e"
+      "sha256": "2e3fb266717f622ea44d6d5366d87159b8934ecca4cb0b87552be8599f687128"
     },
     {
       "name": "refund_by_tier.json",
       "bytes": 5059,
-      "sha256": "f32d8f4742d1308158f96a495ae6ff8b8456314cb85cc4ec6c3b6a084fe67aa2"
+      "sha256": "3fc64ff399e063c559622992ed48a5446edaf099caad3b376890645c540b745e"
     },
     {
       "name": "ops_spend_embed.json",
-      "bytes": 51455,
-      "sha256": "b26612316cd0c1009f9b120f9725689d342dd705f6e160fa9d36dc82efdb9b90"
+      "bytes": 53203,
+      "sha256": "28103209ae5322067c772080b88dca6072f802c3fcfc42d58d028061f4cc802c"
     },
     {
       "name": "card_blacklist.json",
@@ -95,8 +95,8 @@
     },
     {
       "name": "real_renewal_rate.json",
-      "bytes": 1788690,
-      "sha256": "e33c79d1a3ef1a0b0cc2126b9889eda0e78698194b6b672cbc0576a1e53d5291"
+      "bytes": 1800748,
+      "sha256": "2dd147c2d5acd357346974b7104813afc4a3e723e08233d9b03b739fec12d16d"
     },
     {
       "name": "README.md",

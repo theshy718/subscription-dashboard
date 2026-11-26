@@ -3,8 +3,8 @@
   "as_of": "2026-11-26",
   "max_periods": 25,
   "qa": {
-    "n_stock_paths": 4367,
-    "n_stock_expired_paths": 373,
+    "n_stock_paths": 4393,
+    "n_stock_expired_paths": 375,
     "n_stock_black_paths": 365,
     "n_stock_black_uids": 359,
     "n_stock_expired_and_black_paths": 31,
@@ -13,12 +13,12 @@
     "userid_blacklist_file": "/workspace/subscription-cohort/customers/imports/userid_blacklist_20261124.xlsx",
     "n_stock_status": {
       "生效中": 3641,
-      "已过期": 373,
+      "已过期": 375,
       "收单": 344,
-      "": 9
+      "": 33
     },
     "rule": "按时间点剔除：期数N的周期起点=首购日+7×(N-1)，若该起点晚于该路径已过期时间或被拉黑时间（取较早者），则该期不进分子和分母；是否成熟仍用 首购日+7×(N-1)+1≤as_of。已过期时间=最后一次发起支付（成功或失败）；被拉黑时间=官方 UID 黑名单 creation time。不在存量窗内的 cohort 首购回退官方状态。",
-    "n_stock_expire_times": 373,
+    "n_stock_expire_times": 375,
     "n_stock_black_times": 359,
     "platform_weekly_first_in": 3975,
     "platform_weekly_first_with_cutoff": 697,
@@ -27,7 +27,7 @@
       "with_black_only": 324,
       "with_expire_and_black": 31,
       "with_any_cutoff": 697,
-      "fallback_not_in_stock": 41
+      "fallback_not_in_stock": 15
     },
     "channel_weekly_first_in": 3975,
     "channel_weekly_first_with_cutoff": 697,
@@ -36,19 +36,19 @@
       "with_black_only": 324,
       "with_expire_and_black": 31,
       "with_any_cutoff": 697,
-      "fallback_not_in_stock": 41
+      "fallback_not_in_stock": 15
     },
     "platform_period_slots": {
-      "n_slots_kept": 39288,
-      "n_slots_dropped": 6445,
-      "n_expire_fallback_first_day": 2,
+      "n_slots_kept": 39289,
+      "n_slots_dropped": 6444,
+      "n_expire_fallback_first_day": 0,
       "n_expire_missing_any_time": 0,
       "n_black_missing_time": 0
     },
     "channel_period_slots": {
-      "n_slots_kept": 39288,
-      "n_slots_dropped": 6445,
-      "n_expire_fallback_first_day": 2,
+      "n_slots_kept": 39289,
+      "n_slots_dropped": 6444,
+      "n_expire_fallback_first_day": 0,
       "n_expire_missing_any_time": 0,
       "n_black_missing_time": 0
     }
@@ -17545,7 +17545,7 @@
           8,
           8,
           8,
-          7,
+          8,
           0,
           0,
           0,
@@ -17626,7 +17626,7 @@
           "1（12.5%）",
           "1（12.5%）",
           "1（12.5%）",
-          "1（14.3%）",
+          "1（12.5%）",
           "",
           "",
           "",
@@ -17652,7 +17652,7 @@
           "14": "12.5%",
           "15": "12.5%",
           "16": "12.5%",
-          "17": "14.3%",
+          "17": "12.5%",
           "18": "",
           "19": "",
           "20": "",
@@ -72087,7 +72087,7 @@
           8,
           8,
           8,
-          7,
+          8,
           0,
           0,
           0,
@@ -72168,7 +72168,7 @@
           "1（12.5%）",
           "1（12.5%）",
           "1（12.5%）",
-          "1（14.3%）",
+          "1（12.5%）",
           "",
           "",
           "",
@@ -72194,7 +72194,7 @@
           "14": "12.5%",
           "15": "12.5%",
           "16": "12.5%",
-          "17": "14.3%",
+          "17": "12.5%",
           "18": "",
           "19": "",
           "20": "",
