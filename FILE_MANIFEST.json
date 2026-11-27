@@ -1,102 +1,103 @@
 {
-  "package": "dashboard_overnight_2026-11-25",
-  "sc_v": "20261127-bill20261125",
-  "generated_at_stock": "2026-11-27T01:39:02.870434+08:00",
-  "generated_at_pack": "2026-11-27T01:44:53.797240+08:00",
+  "package": "dashboard_overnight_2026-11-26",
+  "sc_v": "20261128-bill20261126",
+  "generated_at_stock": "2026-11-28T01:38:18.118654+08:00",
+  "generated_at_pack": "2026-11-28T01:41:37.456790+08:00",
   "invariants": {
-    "n_customers": 4393,
-    "n_unique_uids": 4310,
-    "sum_net": 445078.54,
-    "sum_gmv": 527372.23,
-    "sum_refund": 27794.8,
-    "bill_day_max": 20261125,
-    "as_of_end": "2026-11-25 23:59:59",
+    "n_customers": 4414,
+    "n_unique_uids": 4331,
+    "sum_net": 448086.71,
+    "sum_gmv": 530992.23,
+    "sum_refund": 27994.3,
+    "bill_day_max": 20261126,
+    "as_of_end": "2026-11-26 23:59:59",
     "blacklist_paths": 365,
     "blacklist_uids": 359,
     "card_blacklist_n": 17
   },
   "status_counts": {
+    "空白": 53,
+    "已过期": 376,
     "生效中": 3641,
-    "收单": 344,
-    "已过期": 375,
-    "空白": 33
+    "收单": 344
   },
-  "status_vs_bill20261124": {
-    "new_paths": 26,
+  "status_vs_bill20261125": {
+    "new_paths": 21,
     "gone": 0,
-    "delta_n": 26,
-    "delta_uid": 26,
-    "delta_net": 3400.9,
-    "delta_gmv": 4417.5,
-    "delta_refund": 219.4,
+    "delta_n": 21,
+    "delta_uid": 21,
+    "delta_net": 3008.17,
+    "delta_gmv": 3620.0,
+    "delta_refund": 199.5,
     "delta_status": {
       "生效中": 0,
       "收单": 0,
-      "已过期": 2,
-      "空白": 24
+      "已过期": 1,
+      "空白": 20
     },
-    "note": "26 new paths are all 11-25 first purchases (10x14.9 VIP_WEEK_199_RETENTION + 16x19.9 VIP_WEEK), matching that day's 26 first-purchase orders. 24 of them are blank (after official plans snapshot Created cutoff 2026-11-24 14:01:25 Asia/Shanghai, no current plan in subscription_plans_20261124). The previous 9 blank 11-24 first purchases remain blank. 2 new paths (UID 171793, 308319; both $14.9 VIP_WEEK_199_RETENTION, first paid 18:46 and 21:57 on 11-25) are 已过期 because the 20261124 snapshot already has EXPIRED 'Retention 1 WEEK' plans for those UIDs from mid-October; not inferred from payment cycle, not filled as 生效中. Existing paths have no status migration. MMC refresh still paused; plans/blacklist still 20261124. Official 11-26 payin is not available — do not invent that day."
+    "status_migrations_existing_paths": 0,
+    "note": "21 new paths are all 11-26 first purchases (6x14.9 VIP_WEEK_199_RETENTION + 14x19.9 VIP_WEEK + 1x99.9半年包 VIP_YEAR), matching that day's 21 first-purchase orders. 20 of them are blank (after official plans snapshot Created cutoff 2026-11-24 14:01:25 Asia/Shanghai, no current plan in subscription_plans_20261124). The previous 33 blank remain blank (9 from 11-24 + 24 from 11-25). 1 new path (UID 393017, $19.9 VIP_WEEK, first paid 21:32 on 11-26) is 已过期 because the 20261124 snapshot already has an EXPIRED '1 WEEK' plan for that UID created 2026-11-22 15:53:47; not inferred from payment cycle, not filled as 生效中. Existing paths have no status migration. MMC refresh still paused; plans/blacklist still 20261124. Official 11-27 payin is not available — do not invent that day."
   },
   "files": [
     {
       "name": "index.html",
-      "bytes": 2344943,
-      "sha256": "1bafc5fa691bc97445cab5c6d588488260ab21e51c39b3581af3fc4680e42cb4"
+      "bytes": 2360406,
+      "sha256": "90f43fd1240808315d70acba55fa42918809b8b985358e7c683d1dea78bd0742"
     },
     {
       "name": "payback.html",
       "bytes": 15117,
-      "sha256": "7469a315542917583861632fa49f7157b64279faa49423e31551917eb5f81f4a"
+      "sha256": "92f9a32654274e3a17d961792f8e64f4d55cc4248a95e9f7d6db92fe6b738211"
     },
     {
       "name": "finance.html",
-      "bytes": 10782,
-      "sha256": "bac426a33459cc95ff5ebf92ff925192eb26881175b22891368946b2adcc0b2d"
+      "bytes": 10780,
+      "sha256": "fbd04c36eb749cc2848a349f0fcf6dd78ffa49166188effb386fff1839304498"
     },
     {
       "name": "customers.html",
       "bytes": 35599,
-      "sha256": "78b5c35a69d7641429f1937fff0cba4942d0a44d64269e90c07e8323c32bdd5a"
+      "sha256": "db3bd1e2eafc22ccae6bbfd32d9d5afc68cc87fde0609caffb66c4d495fb4a33"
     },
     {
       "name": "stock_customers.json",
-      "bytes": 2830442,
-      "sha256": "31838f0a9cb50f6acef622a92bca4fdeacb3e2108c7a8f8d35ec680ceccdfc35"
+      "bytes": 2843753,
+      "sha256": "0c5fdccc997705f643c4de682979898a958495f5bf20bcd08312429c32365f6f"
     },
     {
       "name": "stock_customers.csv",
-      "bytes": 854020,
-      "sha256": "81db34867099c6828e1d7800a5396e85455de7c560ec53b88325681e473aa2ae"
+      "bytes": 857925,
+      "sha256": "9379ba8ee18a8b0ec4d66298d297e65e4af8e171a2c3984d8628b8a871a50a0d"
     },
     {
       "name": "stock_customers_meta.json",
-      "bytes": 10702,
-      "sha256": "6d591f5c57ecab1f4213622130dad7e93d70589b4b571d07cfb4977b2e873a08"
+      "bytes": 10700,
+      "sha256": "bf1dd82f02605b9c1432a04749500092acd83070872c04962d90771d6da81a03"
     },
     {
       "name": "refund_by_tier_embed.json",
-      "bytes": 3979,
-      "sha256": "2e3fb266717f622ea44d6d5366d87159b8934ecca4cb0b87552be8599f687128"
+      "bytes": 3980,
+      "sha256": "4767d329f5a250c4524f414c918687d0bcf8e665dbb9fab6199c7f3224af8a52"
     },
     {
       "name": "refund_by_tier.json",
-      "bytes": 5059,
-      "sha256": "3fc64ff399e063c559622992ed48a5446edaf099caad3b376890645c540b745e"
+      "bytes": 5060,
+      "sha256": "ba7b760e588e408696dc92793451dec1d40074db4a7dc80c0f8009e17d232cb3"
+    },
+    {
+      "name": "real_renewal_rate.json",
+      "bytes": 1812678,
+      "sha256": "0de2cff03cebfb7abadfef8c9670a4cd4a171f21c8b9d7ea22fc747b3ea1089c"
     },
     {
       "name": "ops_spend_embed.json",
-      "bytes": 53203,
-      "sha256": "28103209ae5322067c772080b88dca6072f802c3fcfc42d58d028061f4cc802c"
+      "bytes": 53234,
+      "sha256": "e2feca8e19f28c97791ebb49b598aee181dad8b3b3d9f07f3f1064812371f19b"
     },
     {
       "name": "card_blacklist.json",
       "bytes": 4758,
       "sha256": "fe3b1b0709c70612367aa18b0edf7f2e41225c9cfffc513e4d402a9bd6648350"
-    },
-    {
-      "name": "real_renewal_rate.json",
-      "bytes": 1800748,
-      "sha256": "2dd147c2d5acd357346974b7104813afc4a3e723e08233d9b03b739fec12d16d"
     },
     {
       "name": "README.md",
